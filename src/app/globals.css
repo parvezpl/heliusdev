@@ -129,6 +129,7 @@ a {
   align-items: center;
   width: 100%;
   justify-content: center;
+  height: 100vh;
 }
 
 .detailbox {

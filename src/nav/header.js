@@ -9,10 +9,11 @@ export default function Header () {
             <Link href={"https://github.com/parvezpl"}><FaGithub  style={{ fontSize: "20px", margin:"10px" }} /></Link>
             </div>
             <div className="nav">
-            <Link href="/">home</Link>
-            <Link href="/apps">app</Link>
-            <Link href="/contact">contact</Link>
-            <Link href="/about">about</Link>
+            <Link href="/">Home</Link>
+            <Link href="/apps">App</Link>
+            <Link href="/contact">Contact</Link>
+            <Link href="/about">About</Link>
+            <Link href="/community">Community</Link>
             </div>
           </header>
     )
