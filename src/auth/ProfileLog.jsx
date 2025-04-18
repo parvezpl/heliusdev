@@ -1,12 +1,21 @@
 'use clint'
 import React, { useState } from 'react'
 
-export default function ProfileLog() {
+export default function ProfileLog({logOut}) {
     const [profilebox, setProfilebox] = useState(false)
     const logohander = () => {
         setProfilebox(prev => !prev)
     }
 
+    const logouthandler =()=>{
+        fetch('/api/auth/logout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+        }).then(res => res.json()).then(result => {
+            console.log("logout", result)
+            logOut(false)
+        })
+    }
     const ProfileBoxCom = () => {
         return (
             <div className={`flex absolute justify-center border-1 border-gray-400 shadow-md shadow-gray-800 right-0 z-[99999] w-50 h-50 bg-zinc-300 rounded-md p-1 m-1 `}>
@@ -15,7 +24,7 @@ export default function ProfileLog() {
                     <div className=' flex hover:text-blue-800 hover:bg-zinc-400 hover:px-1 hover:rounded-sm cursor-pointer'>setting</div>
                     <div className=' flex hover:text-blue-800 hover:bg-zinc-400 hover:px-1 hover:rounded-sm cursor-pointer'>help</div>
                     <div className=' flex hover:text-blue-800 hover:bg-zinc-400 hover:px-1 hover:rounded-sm cursor-pointer'>contact</div>
-                    <div className=' flex hover:text-blue-800 hover:bg-zinc-400 hover:px-1 hover:rounded-sm cursor-pointer'>logout</div>
+                    <div onClick={()=>logouthandler()} className=' flex hover:text-blue-800 hover:bg-zinc-400 hover:px-1 hover:rounded-sm cursor-pointer'>logout</div>
                 </div>
             </div>
         )

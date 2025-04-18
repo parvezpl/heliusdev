@@ -4,7 +4,6 @@ import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 import RazorpayButton from "../../payment/razorpaybtn";
 import ManiNav from "../nav/main_nav";
-import Sidebar from "../nav/sidebar";
 
 
 
@@ -20,7 +19,6 @@ export default function Home() {
   return (
     <>
       <ManiNav />
-      <Sidebar/>
       <div className="main_page_chind">
         <h1 className=" text-4xl font-bold m-4 text-shadow-blue-400 text-shadow-md " >Welcome to HeliusDEV !</h1>
         <main className={styles.main}>
