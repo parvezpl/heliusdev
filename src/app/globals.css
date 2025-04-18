@@ -32,8 +32,8 @@ body {
 
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+  /* padding: 0; */
+  /* margin: 0; */
 }
 
 a {
@@ -46,6 +46,18 @@ a {
     color-scheme: dark;
   }
 }
+
+@layer utilities {
+  .scrollbar-none {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;    /* Firefox */
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;            /* Chrome, Safari */
+  }
+}
+
 
 .main_header {
   display: flex;
@@ -98,14 +110,13 @@ a {
   padding: 0;
 }
 
-.main_page {
+/* .main_page {
   display: flex;
   flex: 1;
   flex-direction: row;
   justify-content: flex-start;
-  /* width: 100%; */
 
-}
+} */
 
 .main_nav {
   width: 264px;
@@ -179,21 +190,7 @@ a {
   gap: 20px;
 }
 
-button {
-  width: 7rem;
-  height: 2rem;
-  border-radius: 6px;
-  margin: 4px;
-  cursor: pointer;
-  background-color: #1673ec;
-  color: #ffffff;
-  font-weight: 700;
-}
 
-botton :hover {
-  background-color: #171717;
-  color: wheat;
-}
 
 .subscription_page {
   display: flex;

@@ -1,4 +1,4 @@
-import "./apps.css";
+// import "./apps.css";
 export default function apps(params) {
     
     return (
