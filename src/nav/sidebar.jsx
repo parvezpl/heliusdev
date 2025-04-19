@@ -13,11 +13,16 @@ export default function Sidebar() {
 
     return (
 
-        <nav className="flex z-0 absolute top-12 items-center justify-center  w-full h-16 p-2 ">
-            <ul className="flex flex-row bg-gray-800 p-2 shadow-md rounded-sm">
+        <nav className="flex h-auto ">
+            
+            <ul className="flex flex-col border pointer-events-auto p-1 shadow-md rounded-sm bg-gray-300">
                 {
                     Object.keys(navitionList).map((key, index) => {
-                        return <Link className="flex p-2 bg-orange-300 m-0.5 rounded-sm hover:bg-gray-400" href={navitionList[key]} key={index}>{key}</Link>
+                        return <Link 
+                        className="flex p-1 text-[4vw] sm:text-[1.5vw] m-0.5 rounded-sm hover:bg-gray-400
+                        
+                        "
+                        href={navitionList[key]} key={index}>{key}</Link>
                     })
                 }
 
