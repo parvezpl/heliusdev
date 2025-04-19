@@ -13,13 +13,13 @@ export default function Sidebar() {
 
     return (
 
-        <nav className="flex h-auto ">
+        <nav className="flex h-auto absolute ">
             
-            <ul className="flex flex-col border pointer-events-auto p-1 shadow-md rounded-sm bg-gray-300">
+            <ul className="flex flex-col border pointer-events-auto p-1 shadow-md rounded-sm">
                 {
                     Object.keys(navitionList).map((key, index) => {
                         return <Link 
-                        className="flex p-1 text-[4vw] sm:text-[1.5vw] m-0.5 rounded-sm hover:bg-gray-400
+                        className="flex p-1 text-[4vw] sm:text-[1.5vw] m-0.5 rounded-sm hover:bg-gray-800
                         
                         "
                         href={navitionList[key]} key={index}>{key}</Link>

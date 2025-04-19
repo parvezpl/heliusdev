@@ -18,8 +18,8 @@ export default function ProfileLog({logOut}) {
     }
     const ProfileBoxCom = () => {
         return (
-            <div className={`flex absolute justify-center border-1 border-gray-400 shadow-md shadow-gray-800 right-0 z-[99999] w-50 h-50 bg-zinc-300 rounded-md p-1 m-1 `}>
-                <div className='flex relative flex-col gap-2 justify-center w-full m-[1px] p-2  rounded-md bg-gray-300'>
+            <div className={`flex absolute justify-center border-1 border-gray-900 shadow-md shadow-green-800 right-0 z-[99999] w-50 h-50 bg-gray-900 rounded-md p-1 m-1 `}>
+                <div className='flex relative flex-col gap-2 justify-center w-full m-[1px] p-2  rounded-md '>
                     <div className=' flex hover:text-blue-800 hover:bg-zinc-400 hover:px-1 hover:rounded-sm cursor-pointer'>profile</div>
                     <div className=' flex hover:text-blue-800 hover:bg-zinc-400 hover:px-1 hover:rounded-sm cursor-pointer'>setting</div>
                     <div className=' flex hover:text-blue-800 hover:bg-zinc-400 hover:px-1 hover:rounded-sm cursor-pointer'>help</div>

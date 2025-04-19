@@ -23,7 +23,7 @@ export default function Chromedata({ data }) {
 
 
     return (
-        <div className='flex  w-full  h-screen flex-col ml-1 p-4 border-l-1' >
+        <div className='flex bg-gray-950 w-full  h-screen flex-col ml-1 p-4 text-gray-200' >
             <div className='flex w-full flex-col items-center overflow-auto'>
                 <h1 className=' h-fit text-4xl font-bold m-2 text'> {data.name} </h1>
                 <div className='flex flex-row w-full justify-between overflow-auto '>
@@ -50,7 +50,7 @@ export default function Chromedata({ data }) {
                             </div>
                         </div>
                     </div>
-                    <div className='p-2 min-w-[250px] flex flex-col gap-2 underline border-l-1 border-gray-400
+                    <div className='p-2 min-w-[250px] flex flex-col gap-2 underline border-l-1 border-blue-500
                      '>
                         {
                             heading.map((item, index) => {
