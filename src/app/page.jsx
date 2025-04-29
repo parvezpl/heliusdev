@@ -10,6 +10,7 @@ export default function Home() {
   const [name, setName] = useState("name")
   const router = useRouter()
 
+  // const [getLocalData, setLocalData] = useState(
   const btn = (data) => {
     setName(data)
     console.log("heloo")
