@@ -1,0 +1,23 @@
+.about_page_container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    padding: 10px;
+}
+
+p {
+    display: block;
+    margin: 0 27px;
+    text-align: justify;
+    font-size: 20px;
+    line-height: 2.5;
+}
+
+p span {
+    font-weight: bold;
+    color: #d80303;
+    
+}
