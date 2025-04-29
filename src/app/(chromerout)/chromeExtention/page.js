@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Chromedata from "./Chromedata"
 
-export default function chromeExtention(params) {
+export default function ChromeExtention(params) {
     const [styleOpentState, setStyleOpenState] = useState(false)
     const [opendata, setOpendata] = useState(null)
     const data = [
