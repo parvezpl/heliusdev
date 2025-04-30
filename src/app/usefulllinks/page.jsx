@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { MdDelete } from "react-icons/md";
+import ManiNav from '@/nav/main_nav';
 
 function UseFullLinks() {
     const router = useRouter();
@@ -95,6 +96,7 @@ function UseFullLinks() {
     }
     return (
         <div className=' relative flex flex-col min-h-screen text-gray-950 bg-gray-300 items-center '>
+            <ManiNav />
             <div className='flex justify-between px-2 items-center h-12 w-full bg-gray-500'>
                 <div className='flex gap-4'>
                     <span onClick={() => router.back()} className='border px-2 rounded-sm hover:bg-blue-300'>back</span>

@@ -56,7 +56,7 @@ function Page() {
         })
     }
     return (
-        <div className=' flex flex-col bg-gray-200 h-auto w-auto border items-center p-2
+        <div className=' flex flex-col bg-gray-200 text-gray-950 h-auto w-auto border border-black items-center p-2
         '>
             <div className=' text-2xl font-bold'>{userData.username} </div>
             <div className='flex mt-8 w-full min-h-lvh  flex-col p-2'>
