@@ -50,12 +50,18 @@ export default function Login({ isOpen, onClose, setLoginData }) {
   }
 
   const signuphandler = async ()=>{
-    e.preventDefault()
-    const res = await fetch('/api/auth/user', {
+    const res = await fetch('/api/auth/userAccount', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
     });
+    const result = await res.json();
+    if (result.data.state) {
+      const data=JSON.stringify(result.data)
+      localStorage.setItem('user', data )
+      setLoginData(result.data)
+      onClose()
+    }
   }
 
   const loginbox = () => {

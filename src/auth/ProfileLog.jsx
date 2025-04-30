@@ -23,7 +23,6 @@ export default function ProfileLog({ loginData, logOut }) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
         }).then(res => res.json()).then(result => {
-            console.log("logout", result)
             localStorage.removeItem('user')
             logOut({ state: false })
             router.push('/')

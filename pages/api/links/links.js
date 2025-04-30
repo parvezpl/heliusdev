@@ -5,7 +5,7 @@ import Links from "../../../lib/schema/links";
 
 
 export default async function handler(req, res) {
-    console.log("links", req)
+    // console.log("links", req)
     await connectDB()
     if (req.method == "GET") {
         const {id} = req.query
@@ -17,6 +17,9 @@ export default async function handler(req, res) {
     if (req.method == 'POST') {
         const body = req.body
         const user = await User.findOne({ "username": body.username })
+        if (!user) {
+            return res.status(404).json({ message: "user not found" })
+        }
         const links = await Links.create({
             type: body.type,
             links: body.links,
@@ -25,7 +28,7 @@ export default async function handler(req, res) {
         })
         user.links.push(links._id)
         await links.save()
-        res.status(200).json({links})
+        res.status(200).json({message: "add succsessfully" ,links})
     }
 
     if (req.method == 'DELETE') {

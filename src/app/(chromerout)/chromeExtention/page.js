@@ -64,7 +64,7 @@ export default function ChromeExtention(params) {
                         })
                     }
                 </div>
-                {styleOpentState ? <Chromedata data={opendata} /> : null}
+                {styleOpentState && <Chromedata data={opendata} />}
             </div>
         </div>
     )

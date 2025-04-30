@@ -4,9 +4,8 @@ import User from "../../../lib/schema/users";
 export default async function handler(req, res) {
     await connectDB()
     if (req.method == 'POST') {
-        console.log("hello")
         const {id, updatedPassword} =req.body
-        console.log(id, updatedPassword)
+        // console.log(id, updatedPassword)
         const data = await User.findOne({"_id": id})
         data.password=updatedPassword
         await data.save()

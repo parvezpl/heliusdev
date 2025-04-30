@@ -50,7 +50,7 @@ export default function Chromedata({ data }) {
                             </div>
                         </div>
                     </div>
-                    <div className='p-2 min-w-[250px] flex flex-col gap-2 underline border-l-1 border-blue-500
+                    <div className='p-2 sm:min-w-[250px] flex flex-col gap-2 underline border-l-1 border-blue-500
                      '>
                         {
                             heading.map((item, index) => {

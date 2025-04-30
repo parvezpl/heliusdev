@@ -6,7 +6,7 @@ import { MdDelete } from "react-icons/md";
 
 function UseFullLinks() {
     const router = useRouter();
-
+    // console.log(process.env.NEXT_PUBLIC_DB_API_URL)
     const [addlinkshandler, setAddLinkshandler] = useState(false)
     const [getSuccsessSms, setSuccsessSms] = useState({})
     const [loading, setLoading] = useState(false)
@@ -20,7 +20,6 @@ function UseFullLinks() {
             const res = await fetch('/api/links/links')
             res.json().then((links) => {
                 setLinkdata(links)
-                console.log(links)
             })
 
         }
@@ -30,6 +29,10 @@ function UseFullLinks() {
 
     useEffect(() => {
         const data = localStorage.getItem('user')
+        if (!data) {
+            router.push('/')
+            return
+        }
         setLocalData(JSON.parse(data))
     }, [])
 
@@ -40,18 +43,18 @@ function UseFullLinks() {
 
         const res = await fetch('/api/links/links', {
             method: 'POST',
-            body: JSON.stringify({ ...data, username: getLocalData.user.username }),
+            body: JSON.stringify({ ...data, username: getLocalData?.user.username }),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
         const result = await res.json()
-        setSuccsessSms({ sms: "add succsessfully ", links: result.links })
+        setSuccsessSms({ sms: result.message, links: result.links })
         setAddLinkshandler(false)
         setLoading(!loading)
         setTimeout(() => {
             setSuccsessSms({ sms: "" })
-        }, 3000)
+        }, 5000)
     }
 
     const Deletehandler = async (id) => {
@@ -72,10 +75,6 @@ function UseFullLinks() {
                 setSuccsessSms({ sms: "" })
             }, 3000)
         }
-    }
-
-    const descriptionBoxHandler =()=>{
-        console.log('helo')
     }
 
     function AddLinksForm() {
@@ -115,13 +114,13 @@ function UseFullLinks() {
                         getlinkdata.map((item, index) => {
                             return (
                                 <div key={index} className=' relative flex flex-row  gap-4 justify-between border p-4 m-2  rounded-sm shadow-md shadow-gray-900'
-                                    onMouseEnter={()=>descriptionBoxHandler(item)} >
+                                     >
                                     <h1>{item.type}</h1>
                                     <div className='flex gap-4 items-center'>
                                         <Link href={item.links} target="_blank" rel="noopener noreferrer" className=' border px-2 hover:bg-blue-400 rounded-sm'>click</Link>
-                                        <span onClick={() => Deletehandler(item._id)} className=' cursor-pointer'><MdDelete className='text-2xl hover:text-red-500' /></span>
+                                        {getLocalData.user?.role === "admin" && <span onClick={() => Deletehandler(item._id)} className=' cursor-pointer'><MdDelete className='text-2xl hover:text-red-500' /></span>}
                                     </div>
-                                    <div className='absolute top-0 left-0 rounded-sm w-64  bg-gray-800 opacity-0 hover:opacity-100 transition-opacity  duration-300 ease-in-out flex justify-center items-center'>
+                                    <div className='absolute translate-8 left-0 rounded-sm w-64  bg-gray-800 opacity-0 hover:opacity-100 transition-opacity  duration-300 ease-in-out flex justify-center items-center'>
                                         <div className='w-64 h-32 text-gray-200 bg-gray-700 p-2 rounded-sm'>
                                             <h1 className='text-xl text-green-500 font-bold flex justify-center underline'>description</h1>
                                             <p className='text-sm'>{item.description}</p>
