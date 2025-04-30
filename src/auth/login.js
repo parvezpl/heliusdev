@@ -120,7 +120,7 @@ export default function Login({ isOpen, onClose, setLoginData }) {
     )
   }
   return (
-    <div className="flex absolute w-screen h-screen  justify-center items-center inset-0 z-10  bg-black/50 ">
+    <div className="flex absolute left-0 w-full h-screen  justify-center items-center inset-0 z-10  bg-black/50 ">
       <div ref={loginRef} className=" relative bg-gray-900 w-[300px] h-[300px] flex flex-col justify-center items-center gap-4 p-4 rounded-lg  ">
         {
           issignupbox ? loginbox() : singupbox()

@@ -3,13 +3,13 @@ import { FaYoutube, FaInstagram, FaGithub } from "react-icons/fa"
 import { IoLogoWhatsapp } from "react-icons/io5";
 export default function Footer() {
     return (
-        <footer className="flex justify-around items-center h-[90px]
-             p-[10px] gap-[20px] bg-gray-900 text-gray-200
+        <div className="flex flex-col sm:flex-row justify-around items-center w-full min-h-[14vh]
+             p-[10px] gap-[20px] bg-gray-900 text-gray-200 md:text-[1.5rem]
               border-t-[8px solid #dbbc09] border-t border-[#28851c]">
             <p>term & condition </p>
-            <div style={{ display: "grid", gap: "10px" }}>
-                <h4>contact </h4>
-                <p>email: <span>heliustime@gmail.com</span></p>
+            <div className="flex flex-col gap-2 justify-center items-center">
+                <span>contact </span>
+                <span>email: <span>heliustime@gmail.com</span></span>
             </div>
             <div className="" style={{ display: "flex", gap: "10px" }}>
                 <FaYoutube style={{ fontSize: "20px" }} />
@@ -17,6 +17,6 @@ export default function Footer() {
                 <FaInstagram style={{ fontSize: "20px" }} />
                 <IoLogoWhatsapp style={{ fontSize: "20px" }} />
             </div>
-        </footer>
+        </div>
     );
 }

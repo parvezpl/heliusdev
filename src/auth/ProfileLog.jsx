@@ -5,16 +5,15 @@ import React, { useEffect, useState } from 'react'
 export default function ProfileLog({ loginData, logOut }) {
     const [profilebox, setProfilebox] = useState(false)
     const [userData, setUserData] = useState('')
-     const router = useRouter()
+    const router = useRouter()
     const logohander = () => {
         setProfilebox(prev => !prev)
     }
 
     const userboxhandler = (url) => {
-        if(url){
-            console.log(url,loginData )
+        if (url) {
             router.push(url, {
-                query:{username:"parvez", _id:"1"}
+                query: { username: "parvez", _id: "1" }
             }
             )
             return
@@ -39,14 +38,15 @@ export default function ProfileLog({ loginData, logOut }) {
 
     const ProfileBoxCom = () => {
         return (
-            <div className={`flex absolute justify-center border-1 border-gray-900 shadow-md shadow-green-800 right-0 z-[99999] w-50 h-50 bg-gray-900 rounded-md p-1 m-1 `}>
+            <div className={`flex absolute justify-center border-1 border-gray-900 shadow-md right-0 z-[99999] w-fit h-fit
+             bg-gray-900 rounded-md p-1 m-1 top-12 sm:top-4 `}>
                 <div className='flex relative flex-col gap-2 justify-center w-full m-[1px] p-2  rounded-md '>
                     {
                         userBox.map((item) => {
                             return (
                                 <div key={item.id}
                                     onClick={() => userboxhandler(item.url)}
-                                    className=' flex hover:text-blue-800 hover:bg-zinc-400 hover:px-1 hover:rounded-sm cursor-pointer'>
+                                    className=' flex hover:text-blue-800 hover:bg-gray-900 hover:px-1 hover:rounded-sm cursor-pointer'>
                                     {item.name}
                                 </div>
                             )
@@ -59,19 +59,21 @@ export default function ProfileLog({ loginData, logOut }) {
 
     return (
         <>
-            <div className='relative top-0 z-50'>
+            <div className='relative flex flex-col top-0 z-50'>
                 <div onClick={() => { logohander() }}
                     className='  overflow-hidden flex place-content-center 
-                    cursor-pointer place-items-center h-8 w-8 bg-[#499ea9] 
-                    rounded-2xl shadow-md shadow-gray-800
-                     hover:bg-gray-300 '
+                    cursor-pointer place-items-center h-fit px-4 bg-[#c48b37] 
+                    border rounded-sm shadow-md shadow-blue-300
+                     hover:bg-gray-600 '
                 >
-                    <span className='text-[10px]'>{loginData.user.username}</span>
+                    <span className='text-[10px] text-gray-900 font-bold'>{loginData.user.username}</span>
                 </div>
-                {
-                    profilebox &&
-                    ProfileBoxCom()
-                }
+                <div className='relative' >
+                    {
+                        profilebox &&
+                        ProfileBoxCom()
+                    }
+                </div>
             </div >
         </>
 

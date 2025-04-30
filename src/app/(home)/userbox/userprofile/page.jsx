@@ -62,14 +62,14 @@ function Page() {
             <div className='flex mt-8 w-full min-h-lvh  flex-col p-2'>
                 <div className='border'>
                     <div className='flex justify-center items-center border-b'>
-                        <div className='grid grid-cols-2  p-4 text-[3vw]
+                        <div className='grid grid-cols-2 box-border p-4 text-[3vw]
                       justify-center items-center
                      sm:text-[16px]'>
                             <div className=''>user id : </div> <div>{userData._id}</div>
                             <div>user name :</div> <div>{userData.username}</div>
-                            <div>user password: </div> <div className='flex gap-4 justify-between'>
+                            <div>user password: </div> <div className='flex gap-2 sm:gap-4 justify-between'>
                                 <div className='relative'>
-                                    <div className={`${editable && 'border px-2 w-[150px] rounded-sm bg-gray-300'}`}
+                                    <div className={`${editable && 'border px-2 w-[28vw] sm:w-[20vw] rounded-sm bg-gray-300'}`}
                                         contentEditable={editable}
                                         suppressContentEditableWarning
                                         onInput={handleInput}
@@ -95,16 +95,16 @@ function Page() {
                         </div>
                     </div>
                     <div className=' flex border-b justify-center '>meta data :</div>
-                    <div className='grid grid-cols-12 '>
+                    <div className='grid  sm:grid-cols-12 text-[3vw] '>
                         <div className=' col-span-4 flex text-justify  h-auto flex-col p-4'>
 
                             {/* take object and seprate key and value */}
                             {
                                 Object.keys(userData).map((key) => {
                                     return (
-                                        <div key={key} className='flex flex-row '>
+                                        <div key={key} className='flex flex-row sm:text-[2vw]'>
                                             <div className='text-gray-900 font-bold w-32'>{key}:</div>
-                                            <div className='text-gray-800 '>{
+                                            <div className='text-gray-800  '>{
 
                                                 typeof (userData[key]) === 'object' ?
                                                     userData[key].map((res, index) => {

@@ -7,7 +7,6 @@ import ManiNav from '@/nav/main_nav';
 
 function UseFullLinks() {
     const router = useRouter();
-    // console.log(process.env.NEXT_PUBLIC_DB_API_URL)
     const [addlinkshandler, setAddLinkshandler] = useState(false)
     const [getSuccsessSms, setSuccsessSms] = useState({})
     const [loading, setLoading] = useState(false)
@@ -95,7 +94,7 @@ function UseFullLinks() {
         )
     }
     return (
-        <div className=' relative flex flex-col min-h-screen text-gray-950 bg-gray-300 items-center '>
+        <div className=' relative flex flex-col min-h-screen  text-gray-950 bg-gray-300 items-center '>
             <ManiNav />
             <div className='flex justify-between px-2 items-center h-12 w-full bg-gray-500'>
                 <div className='flex gap-4'>

@@ -2,8 +2,8 @@
 
 import Link from "next/link"
 
-export default function Sidebar() {
-
+export default function Sidebar({isOpen }) {
+    console.log(isOpen)
     const navitionList = {
         ChromeExtention: "/chromeExtention",
         JavaScript: "/apps",
@@ -14,18 +14,17 @@ export default function Sidebar() {
     }
 
     return (
-
-        <nav className="flex h-auto my-4 absolute bg-gray-900 ">
-            <ul className="flex flex-col border pointer-events-auto p-1 shadow-md rounded-sm">
+        // <nav className="flex min-h-screen bg-gray-900 text-gray-200 w-1/4 sm:w-1/5 md:w-1/6 lg:w-1/7 top-0 left-0 z-50 p-2 shadow-md shadow-gray-900 ">
+        <nav className={`flex h-screen w-[25vw] sm:w-[16vw] bg-gray-900 text-white  duration-300 transition-transform  ${isOpen ? ' translate-x-0  ' : '-translate-x-60'} `}>
+            <ul className="flex flex-col p-1 ">
                 {
                     Object.keys(navitionList).map((key, index) => {
                         return <Link
-                            className="flex p-1 text-[4vw] sm:text-[1.5vw] m-0.5 rounded-sm hover:bg-gray-800
+                            className="flex p-1 text-[2.5vw] sm:text-[1.5vw] m-0.5 rounded-sm hover:bg-gray-800
                         "
                             href={navitionList[key]} key={index}>{key}</Link>
                     })
                 }
-
             </ul>
         </nav>
 

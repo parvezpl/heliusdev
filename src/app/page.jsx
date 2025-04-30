@@ -5,10 +5,13 @@ import RazorpayButton from "../../payment/razorpaybtn";
 import ManiNav from "../nav/main_nav";
 import Image from "next/image";
 import Link from "next/link";
+import Sidebar from "@/nav/sidebar";
 
 export default function Home() {
   const [name, setName] = useState("name")
   const router = useRouter()
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
 
   // const [getLocalData, setLocalData] = useState(
   const btn = (data) => {
@@ -16,13 +19,20 @@ export default function Home() {
     console.log("heloo")
   }
 
+  const toggleSidebar = () => {
+    console.log("sidebar")
+    setSidebarOpen(!sidebarOpen);
+  };
   return (
     <>
-      <ManiNav />
-      <div className="flex flex-col min-h-screen bg-gray-500 text-gray-950 justify-center items-center">
-        <h1 className=" text-4xl font-bold m-4 text-shadow-blue-800 text-shadow-md " >Welcome to HeliusDEV !</h1>
-        <main className="" >
-          <div className="flex flex-col w-screen max-h-full justify-center items-center  p-2 rounded-md ">
+      <ManiNav toggleSidebar={toggleSidebar} />
+      <div className="flex flex-row  bg-gray-200 text-gray-950  items-center">
+        <div className={ ` h-screen transition-all duration-300  ${!sidebarOpen ? 'w-0' : 'w-0 sm:w-64'}`} >
+          <Sidebar isOpen={sidebarOpen} />
+        </div>
+        <main className=" h-screen" >
+          <div className="flex flex-col justify-center items-center  p-2 rounded-md ">
+            <h1 className=" inline  text-4xl font-bold text-shadow-blue-800 text-shadow-md m-auto " >Welcome to HeliusDEV !</h1>
             <div>
               <Image
                 src="/home.svg"
@@ -45,10 +55,6 @@ export default function Home() {
                 {/* <RazorpayButton /> */}
 
               </div>
-            </div>
-            <div className="bg-green-400">
-            
-              <Link  href="https://react-icons.github.io/react-icons/icons/ai/">heloo</Link>
             </div>
           </div>
         </main>

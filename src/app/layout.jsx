@@ -10,8 +10,8 @@ export default function RootLayout({ children }) {
         <meta name="google-site-verification" content="ABi5tu30kKpHJMlDdhW71AwFIggm8tsK2VFLhqw9F-8" />
       </head>
       <body className="min-h-screen  ">
-        {children}
-        <Footer />
+          {children}
+          <Footer />
       </body>
     </html>
   );
