@@ -17,6 +17,7 @@ export default function main({ children }) {
           <Sidebar isOpen={sidebarOpen} />
         </div>
         {children}
+        
       </div>
     </>
   )

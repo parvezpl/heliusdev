@@ -36,46 +36,33 @@ export default function ProfileLog({ loginData, logOut }) {
         { id: 5, name: 'logout', url: '' }
     ]
 
-    const ProfileBoxCom = () => {
-        return (
-            <div className={`flex absolute justify-center border-1 border-gray-900 shadow-md right-0 z-[99999] w-fit h-fit
-             bg-gray-900 rounded-md p-1 m-1 top-12 sm:top-4 `}>
-                <div className='flex relative flex-col gap-2 justify-center w-full m-[1px] p-2  rounded-md '>
-                    {
-                        userBox.map((item) => {
-                            return (
-                                <div key={item.id}
-                                    onClick={() => userboxhandler(item.url)}
-                                    className=' flex hover:text-blue-800 hover:bg-gray-900 hover:px-1 hover:rounded-sm cursor-pointer'>
-                                    {item.name}
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-            </div>
-        )
-    }
 
     return (
-        <>
-            <div className='relative flex flex-col top-0 z-50'>
-                <div onClick={() => { logohander() }}
-                    className='  overflow-hidden flex place-content-center 
-                    cursor-pointer place-items-center h-fit px-4 bg-[#c48b37] 
-                    border rounded-sm shadow-md shadow-blue-300
+        <div className='w-fit'>
+            <div onClick={() => { logohander() }}
+                className=' overflow-hidden flex place-content-center 
+                    cursor-pointer place-items-center h-fit w-fit px-4 py-2 bg-[#55aafa] 
+                    border rounded-sm  
                      hover:bg-gray-600 '
-                >
-                    <span className='text-[10px] text-gray-900 font-bold'>{loginData.user.username}</span>
-                </div>
-                <div className='relative' >
-                    {
-                        profilebox &&
-                        ProfileBoxCom()
-                    }
-                </div>
-            </div >
-        </>
+            >
+                <span className='text-[10px] text-gray-900 font-bold'>{loginData.user.username}</span>
+            </div>
+            <div className={` absolute flex flex-col top-13 right-0 w-[16vw] h-fit p-2 py-4 bg-gray-200 rounded-sm shadow-md shadow-gray-900
+                transition-all duration-500 ease-in-out ${profilebox ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                    <div className='bg-amber-400  h-fit flex justify-center py-2'>logo</div>
+                {
+                    userBox.map((item) => {
+                        return (
+                            <div key={item.id}
+                                onClick={() => userboxhandler(item.url)}
+                                className=' inline text-[4vw] sm:text-[3vw] md:text-[2vw]  text-black hover:text-blue-800 hover:border rounded-sm cursor-pointer'>
+                                {item.name}
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        </div>
 
     )
 }

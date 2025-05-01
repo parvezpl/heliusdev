@@ -17,6 +17,7 @@ export default async function handler(req, res) {
     if (req.method == 'POST') {
         const body = req.body
         const user = await User.findOne({ "username": body.username })
+
         if (!user) {
             return res.status(404).json({ message: "user not found" })
         }
@@ -27,7 +28,7 @@ export default async function handler(req, res) {
             author: user._id
         })
         user.links.push(links._id)
-        await links.save()
+        await user.save()
         res.status(200).json({message: "add succsessfully" ,links})
     }
 
