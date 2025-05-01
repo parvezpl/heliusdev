@@ -1,3 +1,5 @@
+import { connectDB } from "../../../lib/db"
+
 export default async function handler(req, res) {
     await connectDB()
     if (req.method == 'POST') {
