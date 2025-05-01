@@ -29,11 +29,11 @@ export default function ProfileLog({ loginData, logOut }) {
     }
 
     const userBox = [
-        { id: 1, name: 'profile', url: '/userbox/userprofile' },
-        { id: 2, name: 'setting', url: '/usersetting' },
-        { id: 3, name: 'contact', url: '/usercontact' },
-        { id: 4, name: 'help', url: '/userhelp' },
-        { id: 5, name: 'logout', url: '' }
+        { id: 1, name: 'Profile', url: '/userbox/userprofile' },
+        { id: 2, name: 'Setting', url: '/usersetting' },
+        { id: 3, name: 'Contact', url: '/usercontact' },
+        { id: 4, name: 'Help', url: '/userhelp' },
+        { id: 5, name: 'Logout', url: '' }
     ]
 
 
@@ -47,15 +47,15 @@ export default function ProfileLog({ loginData, logOut }) {
             >
                 <span className='text-[10px] text-gray-900 font-bold'>{loginData.user.username}</span>
             </div>
-            <div className={` absolute flex flex-col top-13 right-0 w-[16vw] h-fit p-2 py-4 bg-gray-200 rounded-sm shadow-md shadow-gray-900
-                transition-all duration-500 ease-in-out ${profilebox ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+            <div className={` absolute flex flex-col top-13 right-0 w-[30vw] sm:w-[20vw]  p-2 py-4 bg-gray-200 rounded-sm shadow-md shadow-gray-900
+               overflow-hidden  transition-all duration-500 ease-in-out ${profilebox ? 'opacity-100 h-64 sm:h-64 ' : 'opacity-0 pointer-events-none h-0 sm:h-0 '}`}>
                     <div className='bg-amber-400  h-fit flex justify-center py-2'>logo</div>
                 {
                     userBox.map((item) => {
                         return (
                             <div key={item.id}
                                 onClick={() => userboxhandler(item.url)}
-                                className=' inline text-[4vw] sm:text-[3vw] md:text-[2vw]  text-black hover:text-blue-800 hover:border rounded-sm cursor-pointer'>
+                                className=' inline box-content text-[1rem] sm:text-[1.1rem] md:text-[1.3rem] px-1 my-1  text-black hover:text-blue-800 hover:border rounded-sm cursor-pointer'>
                                 {item.name}
                             </div>
                         )

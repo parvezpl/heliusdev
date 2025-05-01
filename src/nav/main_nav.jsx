@@ -30,7 +30,7 @@ export default function ManiNav({ toggleSidebar }) {
     ]
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
             <header
                 className="flex justify-between items-center  box-border
             border-b border-green-800 text-gray-200 bg-[#101923]

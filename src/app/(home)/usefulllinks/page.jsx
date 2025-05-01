@@ -94,8 +94,7 @@ function UseFullLinks() {
         )
     }
     return (
-        <div className=' relative flex flex-col min-h-screen  text-gray-950 bg-gray-300 items-center '>
-            <ManiNav />
+        <div className=' relative flex flex-col -z-10 h-screen w-screen text-gray-950 bg-gray-300 items-center overflow-auto '>
             <div className='flex justify-between px-2 items-center h-12 w-full bg-gray-500'>
                 <div className='flex gap-4'>
                     <span onClick={() => router.back()} className='border px-2 rounded-sm hover:bg-blue-300'>back</span>
