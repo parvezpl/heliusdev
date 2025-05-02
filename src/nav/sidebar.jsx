@@ -9,7 +9,8 @@ export default function Sidebar({isOpen }) {
         Automation: "/contact",
         Python: "/about",
         blog: "/blog",
-        links: '/usefulllinks'
+        links: '/usefulllinks',
+        admin: '/adminhome'
     }
 
     return (
