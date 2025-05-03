@@ -10,16 +10,18 @@ import { MdMenu } from "react-icons/md";
 import { ImCancelCircle } from "react-icons/im";
 export default function ManiNav({ toggleSidebar }) {
     const [isLoginOpen, setLoginOpen] = useState(false)
-    const [loginData, setLoginData] = useState({})
+    const [loginData, setLoginData] = useState({user:{},state:false})
     const [islogout, setLogout] = useState(false)
     const [sidebarshow, setServiceShow] = useState(false)
-    const [menuState, setMenuState] = useState(false)
+    const [chechloginState, setShechloginState] = useState(false)
 
     useEffect(() => {
         const user = localStorage.getItem('user')
-        if (user) {
-            setLoginData(JSON.parse(user))
-        }
+            if (user) {
+                setLoginData(JSON.parse(user))
+               
+            }
+            setShechloginState(true)
     }, [setLogout])
 
     const menu = [
@@ -65,7 +67,7 @@ export default function ManiNav({ toggleSidebar }) {
                             menu.map((con) => {
                                 return (
                                     <Link key={con.id}
-                                        className=" flex hover:text-blue-500 hover:-translate-1 px-1 text-[2vw] sm:text-[1.5vw]" href={`${con.url}`}
+                                        className=" flex hover:text-blue-500 hover:-translate-1 px-1 text-[2vw] sm:text-[1.5vw] capitalize" href={`${con.url}`}
                                     >
                                         {con.name}
                                     </Link>
@@ -75,36 +77,35 @@ export default function ManiNav({ toggleSidebar }) {
 
                     </div>
                     <div className="w-fit justify-center items-center ml-1 ">
-                        {loginData?.state ?
+                        {
+                          chechloginState &&  (loginData?.state ?
                             <ProfileLog loginData={loginData} logOut={(res) => setLoginData(res)} /> :
                             <div onClick={() => setLoginOpen(true)}
-                                className="flex justify-center items-center h-6 
-                            border px-2 text-[15px]
-                            rounded-sm cursor-pointer text-center  hover:bg-blue-600   ">
+                                className="flex justify-center items-center h-6 border px-2 text-[15px] rounded-sm cursor-pointer text-center  hover:bg-blue-600   ">
                                 login
-                            </div>
+                            </div>)
                         }
                         <Login isOpen={isLoginOpen} onClose={() => setLoginOpen(false)} setLoginData={(res) => setLoginData(res)} />
                     </div>
                 </div>
             </header>
             <div className="h-[7vw] sm:h-0 bg-gray-800 sm:hidden flex justify-center items-center">
-            <div className={`flex p-2 w-fit justify-center 
+                <div className={`flex p-2 w-fit justify-center 
                     sm:static sm:flex-row sm:flex sm:gap-2 md:gap-3 `}
-                    >
-                        {
-                            menu.map((con) => {
-                                return (
-                                    <Link key={con.id}
-                                        className=" flex text-white hover:text-blue-500 hover:-translate-1 px-1 text-[2vw] sm:text-[1.5vw]" href={`${con.url}`}
-                                    >
-                                        {con.name}
-                                    </Link>
-                                )
-                            })
-                        }
+                >
+                    {
+                        menu.map((con) => {
+                            return (
+                                <Link key={con.id}
+                                    className=" flex text-white hover:text-blue-500 hover:-translate-1 px-1 text-[2vw] sm:text-[1.5vw]" href={`${con.url}`}
+                                >
+                                    {con.name}
+                                </Link>
+                            )
+                        })
+                    }
 
-                    </div>
+                </div>
             </div>
         </div>
     )
