@@ -2,8 +2,9 @@
 import React, { useState } from 'react'
 import Servicebar from './Servicebar'
 import { MdMenu } from "react-icons/md";
+import Link from 'next/link';
 
-function adminLayout({ children }) {
+function AdminLayout({ children }) {
     const [isSidebarOpen, setSidebarOpen] = useState(false)
     return (
         <>
@@ -12,8 +13,8 @@ function adminLayout({ children }) {
                 <span>
                     <MdMenu onClick={()=>setSidebarOpen(!isSidebarOpen)} />
                 </span>
-                <div>
-                    admin pannel
+                <div className=''>
+                    <Link href={'/'}>Home</Link>
                 </div>
                 <div className='border px-2 rounded-sm hover:bg-green-900'>
                     logout
@@ -28,4 +29,4 @@ function adminLayout({ children }) {
     )
 }
 
-export default adminLayout
+export default AdminLayout

@@ -2,7 +2,7 @@
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
 
-export default function adminhome() {
+export default function AdminHome() {
   const searchParams = useSearchParams()
   const useId = searchParams.get('id')
   const data = JSON.parse(useId)

@@ -39,11 +39,11 @@ export default function Servicebar({isSidebarOpen, setSidebarOpen}) {
 
 
     return (
-        <div className={`flex flex-col px-2 bg-gray-300 text-black h-screen absolute sm:relative
+        <div className={`flex flex-col px-0.5 bg-gray-900 text-black h-screen absolute sm:relative
            box-border w-45 sm:w-[20vw] md:w-[24vw] items-center overflow-hidden ${isSidebarOpen ? " hidden":'flex'}`}>
-            <h1 className=' font-bold text-blue-950 underline'>User Data</h1>
+            <h1 className=' font-bold text-gray-200 underline '>User Data</h1>
             <div className='flex w-screen border-black border-2'></div>
-            <div className='flex flex-col bg-green-400 items-start w-full h-full px-1 mt-1 overflow-auto'>
+            <div className='flex flex-col bg-green-400 items-start w-full h-full p-1 mt-1 overflow-auto'>
                 {
                     Object.keys(getData).length === 0 ? <div className='text-center'>Loading...</div> :
                         Object.keys(getData).map((key, index) => {
