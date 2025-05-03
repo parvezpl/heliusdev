@@ -1,11 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation';
 
-export default function Servicebar() {
+export default function Servicebar({isSidebarOpen, setSidebarOpen}) {
     const [getData, setData] = useState({})
     const [isActive, setIsActive] = useState(false)
     const [activeContent, setActiveContent] = useState({})
     const [userData, setUserData] = useState({})
+    const router =useRouter()
 
     useEffect(() => {
         const getAllData = async () => {
@@ -16,19 +18,6 @@ export default function Servicebar() {
         getAllData()
     }, [])
 
-    // setActiveContent((prev) => {
-    //     const exists = prev.find((val) => val.key === key)
-    //     if (exists) {
-    //         return prev.map(item => item.key === key ? { ...item, isActive: !item.isActive } : item)
-    //     } else {
-    //         return [...prev,
-    //         {
-    //             key: key,
-    //             isActive: true,
-    //             content: content
-    //         }
-    //         ]
-    //     }
     const isOpen = (content, key) => {
         setActiveContent((prev) => {
             const exists = Object.keys(prev).find((prekey) => prekey === key)
@@ -50,31 +39,32 @@ export default function Servicebar() {
 
 
     return (
-        <div className='flex flex-col px-2 bg-gray-300 text-black h-screen w-[20vw] items-center'>
+        <div className={`flex flex-col px-2 bg-gray-300 text-black h-screen absolute sm:relative
+           box-border w-45 sm:w-[20vw] md:w-[24vw] items-center overflow-hidden ${isSidebarOpen ? " hidden":'flex'}`}>
             <h1 className=' font-bold text-blue-950 underline'>User Data</h1>
             <div className='flex w-screen border-black border-2'></div>
-            <div className='flex flex-col bg-amber-300 items-start w-full h-full px-1 mt-1 overflow-auto'>
+            <div className='flex flex-col bg-green-400 items-start w-full h-full px-1 mt-1 overflow-auto'>
                 {
                     Object.keys(getData).length === 0 ? <div className='text-center'>Loading...</div> :
                         Object.keys(getData).map((key, index) => {
                             return (
-                                <div key={index} onClick={() => isOpen(getData[key], key)} className=' relative flex w-full border flex-col cursor-pointer h-fit  p-1 rounded-md'>
-                                    <div className='flex'>
+                                <div key={index} className=' relative flex border flex-col cursor-pointer w-full h-fit  p-1 rounded-md'>
+                                    <div className='flex' onClick={() => isOpen(getData[key], key)} >
                                         {
                                             activeContent[key]?.isActive ? <span className='text-green-800 text-2xl'>-</span> :
-                                                <span className='text-green-800 text-2xl'>+</span>
+                                                <span className='text-green-450 text-2xl'>+</span>
                                         }
                                         <h1 className='inline h-fit text-center  text-blue-950 hover:text-blue-600 '>{key}</h1>
                                     </div>
                                     {
                                         activeContent[key]?.isActive &&
-                                        <div className='flex flex-col relative left-4 '> 
+                                        <div className='flex flex-col  bg-green-520 px-2 m-1 ml-6 rounded-sm '> 
                                             {
 
 
                                                 activeContent[key]?.content?.map(useData => {
                                                     return (
-                                                        <div key={useData._id} className=' hover:text-green-800 text-[0.9em] text-gray-800'>
+                                                        <div key={useData._id} onClick={()=>router.push(`/adminhome?id=${JSON.stringify(useData)}`)} className=' hover:text-green-800 text-[0.9em] text-gray-800'>
                                                             {useData?.username || useData?.type || useData?.title}
                                                         </div>
                                                     )
