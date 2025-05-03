@@ -2,10 +2,10 @@
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
 
-export default function AdminHome() {
+export default function Adminhome() {
   const searchParams = useSearchParams()
   const useId = searchParams.get('id')
-  const data = JSON.parse(useId)
+  const data = JSON.parse(useId) || {}
   console.log(data)
 
   const edithandler = () => {
@@ -21,7 +21,7 @@ export default function AdminHome() {
       <div className='w-full flex justify-center'>
         <div className='bg-gray-300 w-[80vw] h-full text-black '>
           {
-            Object.keys(data).map((key) => {
+            Object.keys(data)?.map((key) => {
               return (
                 <div key={key} className='grid grid-cols-3 sm:text-[2vw] px-2'>
                   <div className='text-gray-900 font-bold w-32 capitalize'>{key}:</div>
