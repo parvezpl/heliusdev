@@ -26,11 +26,11 @@ export default function Home() {
   return (
     <>
       <ManiNav toggleSidebar={toggleSidebar} />
-      <div className="flex flex-row  bg-gray-200 text-gray-950 h-screen  items-center  ">
-        <div className={` h-screen transition-all duration-300  ${!sidebarOpen ? 'w-0' : 'w-0 sm:w-64'}`} >
+      <div className="flex flex-row  bg-gray-200 text-gray-950  ">
+        <div className={`bg-gray-200 transition-all duration-300 ${!sidebarOpen ? 'w-0' : 'w-0 sm:w-64'} `} >
           <Sidebar isOpen={sidebarOpen} />
         </div>
-        <main className=" h-screen" >
+        <main className="" >
           <div className="flex flex-col justify-center items-center  p-2 rounded-md ">
             <h1 className=" inline  text-4xl font-bold text-shadow-blue-800 text-shadow-md m-auto " >Welcome to HeliusDEV !</h1>
             <div>
