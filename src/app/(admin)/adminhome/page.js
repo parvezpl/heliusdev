@@ -25,6 +25,7 @@ import React from 'react'
           {
             Object.keys(data)?.map((key) => {
               return (
+                key !=='__v' && 
                 <div key={key} className='grid grid-cols-3 sm:text-[2vw] px-2'>
                   <div className='text-gray-900 font-bold w-32 capitalize'>{key}:</div>
                   <div className='text-gray-800 break-all '>
@@ -41,7 +42,7 @@ import React from 'react'
                             </div>
                           )
                         }) :
-                        data[key]
+                       String(data[key])
                     }
 
                   </div>

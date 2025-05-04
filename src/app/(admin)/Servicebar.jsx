@@ -60,8 +60,6 @@ export default function Servicebar({isSidebarOpen, setSidebarOpen}) {
                                         activeContent[key]?.isActive &&
                                         <div className='flex flex-col  bg-green-520 px-2 m-1 ml-6 rounded-sm '> 
                                             {
-
-
                                                 activeContent[key]?.content?.map(useData => {
                                                     return (
                                                         <div key={useData._id} onClick={()=>router.push(`/adminhome?id=${JSON.stringify(useData)}`)} className=' hover:text-green-800 text-[0.9em] text-gray-800'>

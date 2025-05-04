@@ -30,7 +30,7 @@ export default function Home() {
         <div className={`bg-gray-200 transition-all duration-300 ${!sidebarOpen ? 'w-0' : 'w-0 sm:w-64'} `} >
           <Sidebar isOpen={sidebarOpen} />
         </div>
-        <main className="" >
+        <main className="flex min-h-screen min-w-screen justify-center" >
           <div className="flex flex-col justify-center items-center  p-2 rounded-md ">
             <h1 className=" inline  text-4xl font-bold text-shadow-blue-800 text-shadow-md m-auto " >Welcome to HeliusDEV !</h1>
             <div>
