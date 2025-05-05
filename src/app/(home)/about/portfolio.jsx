@@ -15,8 +15,8 @@ function Portfolio() {
   return (
     <div className='flex flex-col w-full justify-center items-center box-border'>
       <div className='flex capitalize font-bold text-2xl'>web development skills required</div>
-      <div className='grid grid-cols-1  md:grid-cols-2 md:flex-row gap-8 m-4'>
-        <div className='w-[40vw] h-[30vh] bg-gray-800 border border-b-cyan-400 m-1 p-1 cursor-pointer flex justify-center items-center
+      <div className='flex flex-wrap items-center justify-center   md:flex-row gap-8 m-4'>
+        <div className='shrink-1 min-w-50  w-[40vw] h-[30vh] bg-gray-800 border border-b-cyan-400 m-1 p-1 cursor-pointer flex justify-center items-center
       shadow-black shadow-md rounded-sm text-gray-200 hover:bg-gray-900'
           onClick={() => itemBoxHandler()}>
           <div className='flex flex-col justify-center items-center'>
@@ -46,7 +46,7 @@ function Portfolio() {
             </div>
           </div>
         </div>
-        <div className='w-[40vw] h-[30vh] bg-gray-800 border border-b-cyan-400 m-1 p-1 cursor-pointer flex justify-center items-center
+        <div className='shrink-1 min-w-50 w-[40vw] h-[30vh] bg-gray-800 border border-b-cyan-400 m-1 p-1 cursor-pointer flex justify-center items-center
       shadow-black shadow-md rounded-sm text-gray-200 hover:bg-gray-900'
           onClick={() => itemBoxHandler()}>
           <div className='flex flex-col justify-center items-center'>
@@ -69,7 +69,7 @@ function Portfolio() {
             </div>
           </div>
         </div>
-        <div className='w-[40vw] h-[30vh] bg-gray-800 border border-b-cyan-400 m-1 p-1 cursor-pointer flex justify-center items-center
+        <div className='shrink-1 min-w-50  w-[40vw] h-[30vh] bg-gray-800 border border-b-cyan-400 m-1 p-1 cursor-pointer flex justify-center items-center
       shadow-black shadow-md rounded-sm text-gray-200 hover:bg-gray-900'
           onClick={() => itemBoxHandler()}>
           <div className='flex flex-col justify-center items-center'>
