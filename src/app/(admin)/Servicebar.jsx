@@ -17,7 +17,7 @@ export default function Servicebar({isSidebarOpen, setSidebarOpen}) {
         }
         getAllData()
     }, [])
-
+    console.log(getData)
     const isOpen = (content, key) => {
         setActiveContent((prev) => {
             const exists = Object.keys(prev).find((prekey) => prekey === key)

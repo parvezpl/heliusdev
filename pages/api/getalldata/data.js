@@ -3,7 +3,8 @@ import { connectDB } from "../../../lib/db";
 import User from "../../../lib/schema/users";
 import Links from "../../../lib/schema/links";
 import Blog from "../../../lib/schema/blog";
-// import Community from "../../../lib/schema/community";
+import PaymentSchema from "../../../lib/schema/razorpayschema";
+
 
 
 export default async function handler(req, res) {
@@ -13,7 +14,8 @@ export default async function handler(req, res) {
         const users = await User.find()
         const links = await Links.find()
         const blogs = await Blog.find()
-        return res.status(200).json({ users, links, blogs });
+        const paymentSchema = await PaymentSchema.find()
+        return res.status(200).json({ users, links, blogs,paymentSchema });
     }
 
     // if (req.method == 'POST') {
