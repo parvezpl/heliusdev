@@ -4,13 +4,13 @@ import Link from "next/link"
 
 export default function Sidebar({isOpen }) {
     const navitionList = {
-        ChromeExtention: "/chromeExtention",
-        JavaScript: "/apps",
-        Automation: "/contact",
-        Python: "/about",
-        blog: "/blog",
+        admin: '/adminhome',
         links: '/usefulllinks',
-        admin: '/adminhome'
+        blog: "/blog",
+        JavaScript: "/apps",
+        Python: "/about",
+        Automation: "/contact",
+        ChromeExtention: "/chromeExtention"
     }
 
     return (

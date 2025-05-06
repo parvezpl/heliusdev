@@ -1,13 +1,14 @@
 'use client'
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import RazorpayButton from "../../payment/razorpaybtn";
+
 import ManiNav from "../nav/main_nav";
 import Image from "next/image";
 import Link from "next/link";
 import Sidebar from "@/nav/sidebar";
 import Service from "./(home)/service/service";
 import Pythonbadge from "./(home)/service/pythonbadge";
+import PayButton from "./components/razorpay/PayButton";
 
 export default function Home() {
   const [name, setName] = useState("name")
@@ -25,6 +26,9 @@ export default function Home() {
     console.log("sidebar")
     setSidebarOpen(!sidebarOpen);
   };
+  const subcribehandler =()=>{
+    console.log('key',process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)
+  }
   return (
     <>
       <ManiNav toggleSidebar={toggleSidebar} />
@@ -53,11 +57,12 @@ export default function Home() {
                   <span className=" text-center capitalize">subcribe in only 100 rs.</span>
                   <div className="flex flex-col sm:flex-row ">
                     <div className="text-[14px]">click to get subsciption -</div>
-                    <button className="bg
-                  -[#35da66] px-1 rounded-sm border-1 m-1">subcribe</button>
+                    <div
+                    onClick={()=>subcribehandler()}
+                     className=""><PayButton/></div>
                   </div>
                 </div>
-                {/* <RazorpayButton /> */}
+               
               </div>
             </div>
           </div>

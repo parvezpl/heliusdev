@@ -44,7 +44,7 @@ export default function Login({ isOpen, onClose, setLoginData }) {
     if (result.data.state) {
       const data=JSON.stringify(result.data)
       localStorage.setItem('user', data )
-      setLoginData(result.data)
+      setLoginData(true)
       onClose()
     }
   }
