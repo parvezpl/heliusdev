@@ -40,10 +40,13 @@ export default function ManiNav({ toggleSidebar }) {
         ">
 
                 {/* onClick={() => setServiceShow(prev => !prev)} */}
-                <div onClick={toggleSidebar} className="top-12 max-w-[43vw] sm:min-w-[43vw] ">
+                <div onClick={()=>{
+                    toggleSidebar();
+                    setServiceShow(prev => !prev)
+                }} className="top-12 max-w-[43vw] sm:min-w-[43vw] ">
                     <span className=" text-2xl py-1 rounded-sm cursor-pointer hover:text-blue-600 rotate-40">
                         {!sidebarshow ?
-                            <MdMenu className=" animate-pulse" />
+                            <MdMenu/>
                             :
                             <ImCancelCircle className="" />
                         }

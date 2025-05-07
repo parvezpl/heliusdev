@@ -53,9 +53,9 @@ export default function Home() {
                 <p className="w-9/10 sm:w-6/10 md:w-7/10" style={{ fontSize: "16px", fontFamily: "math" }}>Get exclusive access to all Chrome extension codes and premium resources. Plus, become a part of the HeliusDEV community by contributing to ongoing projects.
                   Subscribe now and take your development journey to the next level!
                 </p>
-                <div className="flex flex-col md:flex-row mt-8 gap-2">
+                <div className="flex flex-col md:flex-row mt-8 gap-2 justify-center items-center">
                   <span className=" text-center capitalize">subcribe in only 100 rs.</span>
-                  <div className="flex flex-col sm:flex-row ">
+                  <div className="flex flex-col sm:flex-row items-center justify-center ">
                     <div className="text-[14px]">click to get subsciption -</div>
                     <div
                     onClick={()=>subcribehandler()}
