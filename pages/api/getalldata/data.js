@@ -3,7 +3,7 @@ import { connectDB } from "../../../lib/db";
 import User from "../../../lib/schema/users";
 import Links from "../../../lib/schema/links";
 import Blog from "../../../lib/schema/blog";
-import PaymentSchema from "../../../lib/schema/razorpayschema";
+import Payments from "../../../lib/schema/razorpayschema";
 
 
 
@@ -12,10 +12,20 @@ export default async function handler(req, res) {
        
     if (req.method == "GET") {
         const users = await User.find()
-        const links = await Links.find()
-        const blogs = await Blog.find()
-        const paymentSchema = await PaymentSchema.find()
-        return res.status(200).json({ users, links, blogs,paymentSchema });
+        const links = await Links.find().populate('author', 'username')
+        const blogs = await Blog.find().populate('author', 'username')
+        const payments = await Payments.find().populate('userId', 'username')
+        const userIdUserUname= payments.map((item) => {
+            return  {id:item.userId._id, username: item.userId.username}
+        })
+        const userdata = userIdUserUname.reduce((acc, curr) => {
+            acc[curr.id];
+            return acc;
+        }, {});
+        
+        // const data = await PaymentSchema.find({'userId':userdata.id})
+        console.log(userdata)
+        return res.status(200).json({ users, links, blogs, payments });
     }
 
     // if (req.method == 'POST') {

@@ -23,7 +23,7 @@ export default function ProfileLog({ loginData, logOut }) {
             headers: { 'Content-Type': 'application/json' },
         }).then(res => res.json()).then(result => {
             localStorage.removeItem('user')
-            logOut({ state: false })
+            logOut({user:{},state:false})
             router.push('/')
         })
     }
@@ -39,7 +39,7 @@ export default function ProfileLog({ loginData, logOut }) {
 
     return (
         <div className='w-fit'>
-            <div onClick={() => { logohander() }}
+            <div onClick={() => logohander()}
                 className=' overflow-hidden flex place-content-center 
                     cursor-pointer place-items-center h-fit w-fit px-4 py-2 bg-[#55aafa] 
                     border rounded-sm  

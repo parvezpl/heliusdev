@@ -19,11 +19,10 @@ export default function ManiNav({ toggleSidebar }) {
         const user = localStorage.getItem('user')
             if (user) {
                 setLoginData(JSON.parse(user))
-               
             }
             setShechloginState(true)
     }, [setLogout])
-
+    console.log(loginData)
     const menu = [
         { id: 1, name: "home", url: '/' },
         { id: 2, name: "office", url: '/office' },
