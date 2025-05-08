@@ -9,10 +9,19 @@ import User from "../../../lib/schema/users";
 
 export default async function handler(req, res) {
     await connectDB()
-       
+
     if (req.method == "GET") {
         console.log("get data")
-        const user = await User.findOne({'_id':req.query.id})
-        return res.status(200).json({ user});
+        const user = await User.findOne({ '_id': req.query.id })
+        return res.status(200).json({ user });
+    }
+
+    if (req.method == "PUT") {
+        const { head, value } = req.body
+        console.log(head, value, req.query.id)
+        const user = await User.findOne({ '_id': req.query.id })
+        user[head] = value
+        await user.save()   
+        return res.status(200).json({massage: "updated successfull", user });
     }
 }

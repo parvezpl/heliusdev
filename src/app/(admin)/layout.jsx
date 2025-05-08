@@ -20,7 +20,7 @@ function AdminLayout({ children }) {
                     logout
                 </div>
             </nav>
-            <div className='flex'>
+            <div className='flex text-black'>
                 <Servicebar isSidebarOpen={isSidebarOpen} setSidebarOpen={setSidebarOpen} />
                 {children}
             </div>

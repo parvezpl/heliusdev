@@ -2,14 +2,17 @@
 import React from 'react'
 import useStore from '../../../../store/useStore'
 import Button from '../../components/ui/Button'
-import { MdSystemUpdateAlt } from "react-icons/md";
+import { MdSystemUpdateAlt, MdDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
+
 
 
 function Page() {
     const [isUserOpen, setUserOpen] = React.useState(false)
     const [userdata, setUserdata] = React.useState({})
     const [isEdit, setIsEdit] = React.useState(false)
+    const [formdata, setFormdata] = React.useState({})
+    const [editabledata, setEditabledata] = React.useState({})
 
     const collection = useStore((state) => state.collection)
     const collectionHead = useStore((state) => state.collectionHead)
@@ -37,27 +40,34 @@ function Page() {
         // fetchdata()
     }
     const onUpdate = (id) => {
-        console.log("up", id)
-        setIsEdit(false)
+        console.log(formdata)
+        setEditabledata({})
         const fetchdata = async () => {
-            const response = await fetch(`api/user/update?id=${id}`);
+            const response = await fetch(`api/user/oneUseData?id=${id}`,{
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    head: formdata.head,
+                    value: formdata.value,
+                  }),
+            });
             const result = await response.json();
             console.log(result.user)
             setUserdata(result.user)
+            alert(result.massage)
         }
-        // fetchdata()
+        fetchdata()
     }
-    const onEdit = (id) => {
-        console.log("up", id)
-        setIsEdit(true)
-        const fetchdata = async () => {
-            const response = await fetch(`api/user/update?id=${id}`);
-            const result = await response.json();
-            console.log(result.user)
-            setUserdata(result.user)
-        }
-        // fetchdata()
+    const onEdit = (res) => {
+        setEditabledata(res)
     }
+
+    const inputhandler = (e) => {
+        console.log(e.currentTarget?.textContent)
+        setFormdata({ ...formdata, head:editabledata.head,  value: e.currentTarget?.textContent })
+    }       
     return (
         <div className='flex flex-col w-full h-screen items-center border box-border'>
             <h3 className='text-2xl font-bold'>{collectionHead}</h3>
@@ -90,8 +100,8 @@ function Page() {
                     {
                         isUserOpen &&
                         <div className=' absolute top-15 right-0 w-[65vw] mr-1 sm:w-[50vw] md:w-[60vw] bg-green-400 flex flex-col items-center  border rounded-sm
-                        shadow-lg shadow-black h-[40vh] text-[12px] sm:text-[1rem] overflow-auto'>
-                            <h3 className='font-bold bg-gray-300 px-2 rounded-sm'>{`User Name : ${userdata.username}`}</h3>
+                        shadow-lg shadow-black h-[40vh] text-[12px] sm:text-[1rem] overflow-y-auto'>
+                            <h3 className='font-bold bg-green-300 px-2 rounded-sm uppercase '>{`User Name : ${userdata.username}`}</h3>
                             <div className="max-w-2xl mx-auto mt-6 bg-white shadow rounded">
                                 {Object.keys(userdata).map((item, index) => (
                                     <div
@@ -101,28 +111,36 @@ function Page() {
                                         <div className="font-semibold text-gray-800 break-all">{`${item}`}</div>
                                         {typeof (userdata[item]) === 'object' ?
                                             userdata[item].length
-                                            : <div className={` text-gray-600 break-all ${isEdit && 'border'}`} contentEditable={isEdit}>{`${userdata[item]}`}</div>}
+                                            : <div className={` text-gray-600 break-all ${index === editabledata.clickid && 'border'}`}
+                                                // onInput={e =>console.log(e.currentTarget?.textContent)}
+                                                onInput={e => inputhandler(e)}
+                                                contentEditable={index === editabledata.clickid}
+                                                suppressContentEditableWarning
+                                            >{`${userdata[item]}`}</div>
+                                        }
                                         <div className="flex gap-2">
                                             <Button
                                                 variant="destructive"
                                                 onClick={() => onDelete(index)}
-                                                className='p-0 h-fit, w-fit'
+                                                className='!p-0 !bg-gray-300 w-fit flex justify-center items-center '
                                             >
-                                                Del
+                                                <MdDelete className='text-xl text-red-500' />
                                             </Button>
                                             {
-                                                isEdit ? <Button
+                                                index === editabledata.clickid ? <Button
                                                     variant="outline"
-                                                    onClick={() => onUpdate({ [item]: userdata[item] })}
+                                                    onClick={() => onUpdate(userdata._id)}
+                                                    className='!p-0 !bg-gray-300 w-fit flex justify-center items-center '
                                                 >
-                                                    <MdSystemUpdateAlt className='text-xl' />
+                                                    <MdSystemUpdateAlt className='text-xl text-green-700' />
                                                 </Button>
                                                     :
                                                     <Button
                                                         variant="outline"
-                                                        onClick={() => onEdit({ [item]: userdata[item] })}
+                                                        onClick={() => onEdit({ head:item, clickid: index })}
+                                                        className='!p-0 !bg-gray-300 w-fit flex justify-center items-center '
                                                     >
-                                                        <FaRegEdit className='text-xl' />
+                                                        <FaRegEdit className='text-xl text-blue-800' />
                                                     </Button>
                                             }
                                         </div>

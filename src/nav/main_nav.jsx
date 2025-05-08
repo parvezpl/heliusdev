@@ -22,7 +22,7 @@ export default function ManiNav({ toggleSidebar }) {
             }
             setShechloginState(true)
     }, [setLogout])
-    console.log(loginData)
+    // console.log(loginData)
     const menu = [
         { id: 1, name: "home", url: '/' },
         { id: 2, name: "office", url: '/office' },
