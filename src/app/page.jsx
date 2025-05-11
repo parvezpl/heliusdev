@@ -9,31 +9,49 @@ import Sidebar from "@/nav/sidebar";
 import Service from "./(home)/service/service";
 import Pythonbadge from "./(home)/service/pythonbadge";
 import PayButton from "./components/razorpay/PayButton";
+import { useEffect, useRef } from "react"
 
 export default function Home() {
-  const [name, setName] = useState("name")
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
 
-  // const [getLocalData, setLocalData] = useState(
-  const btn = (data) => {
-    setName(data)
-    console.log("heloo")
-  }
+  const sidebarRef = useRef()
+  const navbtnRef = useRef()
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      const isMobile = window.innerWidth <= 768;
+      if (isMobile && sidebarRef.current && !sidebarRef.current.contains(event.target) && !navbtnRef.current.contains(event.target)) {
+         setSidebarOpen(false)
+      }
+
+    }
+    if (sidebarOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [sidebarOpen])
+
+
+
 
   const toggleSidebar = () => {
-    console.log("sidebar")
-    setSidebarOpen(!sidebarOpen);
+    console.log('toggleSidebar',sidebarOpen )
+    setSidebarOpen(prev => !prev)
   };
-  const subcribehandler =()=>{
-    console.log('key',process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)
+  const subcribehandler = () => {
+    console.log('key', process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)
   }
   return (
     <>
-      <ManiNav toggleSidebar={toggleSidebar} />
+      <div ref={navbtnRef}>
+        <ManiNav toggleSidebar={toggleSidebar} />
+      </div>
       <div className="flex flex-row  bg-[#b1d891] text-gray-950  ">
-        <div className={`bg-gray-200 transition-all duration-300 ${!sidebarOpen ? 'w-0' : 'w-0 sm:w-64'} `} >
+        <div ref={sidebarRef} className={`bg-gray-200 transition-all duration-300 ${!sidebarOpen ? 'w-0' : 'w-0 sm:w-64'} `} >
           <Sidebar isOpen={sidebarOpen} />
         </div>
         <main className="flex flex-col min-h-screen max-w-screen " >
@@ -58,11 +76,11 @@ export default function Home() {
                   <div className="flex flex-col sm:flex-row items-center justify-center ">
                     <div className="text-[14px]">click to get subsciption -</div>
                     <div
-                    onClick={()=>subcribehandler()}
-                     className=""><PayButton/></div>
+                      onClick={() => subcribehandler()}
+                      className=""><PayButton /></div>
                   </div>
                 </div>
-               
+
               </div>
             </div>
           </div>

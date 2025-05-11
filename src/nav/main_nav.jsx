@@ -8,7 +8,7 @@ import ProfileLog from "../auth/ProfileLog.jsx";
 import Sidebar from "./sidebar";
 import { MdMenu } from "react-icons/md";
 import { ImCancelCircle } from "react-icons/im";
-export default function ManiNav({ toggleSidebar }) {
+export default function ManiNav({ toggleSidebar  }) {
     const [isLoginOpen, setLoginOpen] = useState(false)
     const [loginData, setLoginData] = useState({user:{},state:false})
     const [islogout, setLogout] = useState(false)
@@ -47,7 +47,7 @@ export default function ManiNav({ toggleSidebar }) {
                         {!sidebarshow ?
                             <MdMenu/>
                             :
-                            <ImCancelCircle className="" />
+                            <ImCancelCircle />
                         }
                     </span>
                     {/* {sidebarshow && <Sidebar />} */}

@@ -2,7 +2,10 @@
 
 import Link from "next/link"
 
+
 export default function Sidebar({isOpen }) {
+
+
     const navitionList = {
         admin: '/adminhome',
         links: '/usefulllinks',
@@ -15,7 +18,7 @@ export default function Sidebar({isOpen }) {
 
     return (
         // <nav className="flex min-h-screen bg-gray-900 text-gray-200 w-1/4 sm:w-1/5 md:w-1/6 lg:w-1/7 top-0 left-0 z-50 p-2 shadow-md shadow-gray-900 ">
-        <nav className={`flex relative h-[100%] w-[25vw] sm:w-[16vw] bg-gray-900 text-white z-50  duration-300 transition-transform  ${isOpen ? ' translate-x-0 opacity-100  ' : '-translate-x-30 opacity-0 '} `}>
+        <nav  className={`flex relative h-[100%] w-[25vw] sm:w-[16vw] bg-gray-900 text-white z-50  duration-300 transition-transform  ${isOpen ? ' translate-x-0 opacity-100  ' : '-translate-x-30 opacity-0 '} `}>
             <ul className="flex flex-col p-1  ">
                 {
                     Object.keys(navitionList).map((key, index) => {
