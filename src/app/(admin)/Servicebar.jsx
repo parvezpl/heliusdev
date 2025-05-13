@@ -1,21 +1,23 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import useStore from '../../../store/useStore'
+import { useRouter } from 'next/navigation'
 
 export default function Servicebar({ isSidebarOpen, setSidebarOpen }) {
+    const router = useRouter()
 
-
-    const setCollection =useStore((state)=>state.setCollection)
+    const setCollection = useStore((state) => state.setCollection)
     const collectionHead = [
-        { name: 'Users', api:'api/user/head/headfetch' },
-        { name: 'Payments' },
+        { name: 'Users', rout: 'adminhome/users', api: 'api/user/head/headfetch' },
+        { name: 'Payments',rout: 'adminhome/payments', api: 'api/user/payments/payment' },
         { name: 'Links' },
         { name: 'blogs' },
     ]
 
-    const headheander =(value)=>{
+    const headheander = (value) => {
         setCollection(value)
-    }   
+        router.push(`/${value.rout}`)
+    }
 
     return (
         <div className={`flex flex-col px-0.5 bg-green-400 text-black h-screen absolute sm:relative border z-999
