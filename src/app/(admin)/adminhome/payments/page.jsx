@@ -39,13 +39,13 @@ export default function Page() {
     }
     console.log(paymentdata.length !== 0)
     return (
-        <div className='flex flex-col gap-4 p-4 items-center w-full h-screen'>
+        <div className='flex flex-col gap-4 p-4 items-center w-full h-screen bg-green-200 text-gray-950'>
             <h1 className='text-2xl font-bold'>Payments</h1>
             <div className='flex flex-col gap-4'>
                 <div className='flex justify-between'>
                     <h2 className='text-xl font-semibold'>Payment History</h2>
                     <div className='flex flex-col gap-2'>
-                        <div className='flex items-center border border-gray-300 rounded-md p-2'>
+                        <div className='flex items-center border border-gray-500 rounded-md p-2'>
                             <input type="text" placeholder="Search..." className='outline-none' onChange={inpursearchhandler} />
                             <IoSearchOutline className='text-2xl'/>
                         </div>
@@ -55,13 +55,13 @@ export default function Page() {
                     </div>
                 </div>
                 <div className='overflow-auto max-h-[60vh]'>
-                    <table className='min-w-full border-collapse border border-gray-300'>
+                    <table className='min-w-full border-collapse border border-green-400'>
                         <thead>
                             <tr>
-                                <th className='border border-gray-300 px-4 py-2'>Name</th>
-                                <th className='border border-gray-300 px-4 py-2'>Date</th>
-                                <th className='border border-gray-300 px-4 py-2'>Amount</th>
-                                <th className='border border-gray-300 px-4 py-2'>Status</th>
+                                <th className='border border-green-400 px-4 py-2'>Name</th>
+                                <th className='border border-green-400 px-4 py-2'>Date</th>
+                                <th className='border border-green-400 px-4 py-2'>Amount</th>
+                                <th className='border border-green-400 px-4 py-2'>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,10 +76,10 @@ export default function Page() {
                                     });
                                     return (
                                         <tr key={index}>
-                                            <td className='border border-gray-300 px-4 py-2'>{value.userId.username}</td>
-                                            <td className='border border-gray-300 px-4 py-2'>{date}</td>
-                                            <td className='border border-gray-300 px-4 py-2'>{value.amount}</td>
-                                            <td className='border border-gray-300 px-4 py-2'>{value.status}</td>
+                                            <td className='border border-green-300 px-4 py-2'>{value.userId.username}</td>
+                                            <td className='border border-green-300 px-4 py-2'>{date}</td>
+                                            <td className='border border-green-300 px-4 py-2'>{value.amount}</td>
+                                            <td className='border border-green-300 px-4 py-2'>{value.status}</td>
                                         </tr>
                                     )
                                 })
