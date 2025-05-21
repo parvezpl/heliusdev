@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+
 import ManiNav from "../nav/main_nav";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,18 +15,19 @@ import { useEffect, useRef } from "react"
 export default function Home() {
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [seachOpen, setSeachOpen] = useState(false);
 
 
   const sidebarRef = useRef()
   const navbtnRef = useRef()
+  const searchRef = useRef()
 
   useEffect(() => {
     function handleClickOutside(event) {
       const isMobile = window.innerWidth <= 768;
       if (isMobile && sidebarRef.current && !sidebarRef.current.contains(event.target) && !navbtnRef.current.contains(event.target)) {
-         setSidebarOpen(false)
+        setSidebarOpen(false)
       }
-
     }
     if (sidebarOpen) {
       document.addEventListener('mousedown', handleClickOutside)
@@ -35,15 +37,58 @@ export default function Home() {
     }
   }, [sidebarOpen])
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setSeachOpen(false)
+      }
+    }
+    if (seachOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [seachOpen])
+
 
 
 
   const toggleSidebar = () => {
-    console.log('toggleSidebar',sidebarOpen )
+    console.log('toggleSidebar', sidebarOpen)
     setSidebarOpen(prev => !prev)
   };
   const subcribehandler = () => {
     console.log('key', process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)
+  }
+
+  let timedata = 2000
+  const [suggationword, setSuggationword] = useState([])
+  let timeout;
+
+  const seachhandler = async (e) => {
+    const word = e.target.value
+    setSeachOpen(true)
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      fetchData()
+    }, 500);
+
+
+    const fetchData = async () => {
+      try {
+        if (word.length >= 0) {
+          const res = await fetch(`/api/wordsuggation/ws?word=${word}`)
+          const data = await res.json()
+          setSuggationword(data.suggationword)
+        }
+      }
+      catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
   }
   return (
     <>
@@ -55,6 +100,21 @@ export default function Home() {
           <Sidebar isOpen={sidebarOpen} />
         </div>
         <main className="flex flex-col min-h-screen max-w-screen " >
+          <div className=" relative flex flex-col justify-center items-center  p-2 rounded-md ">
+            <div className="flex flex-row justify-center items-center border border-gray-400 rounded-md  mx-4 text-justify  ">
+              <input onChange={seachhandler} type="text" placeholder="search" className="outline-none mx-2  " />
+              <button className="bg-blue-500 text-white px-2 py-1 rounded-md ">Search</button>
+            </div>
+            <div ref={searchRef} className={`flex absolute top-12 justify-center items-center mx-4 text-justify ${!seachOpen ? 'hidden' : 'visible'}`}>
+              <div className="flex flex-col justify-center bg-green-200 rounded-md w-70  mx-4 px-4 text-justify max-h-50 overflow-y-auto">
+                {suggationword.map((item, index) => (
+                  <div key={index} onClick={() => `/wordsuggation/${item}`} className="text-blue-500 hover:underline">
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
           <h1 className=" inline  text-4xl font-bold text-shadow-blue-800 text-shadow-md self-center m-4 " >Welcome to HeliusDEV !</h1>
           <div className="flex flex-col sm:flex-row justify-center items-center  p-2 rounded-md ">
             <Image

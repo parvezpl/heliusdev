@@ -80,12 +80,13 @@ export default function ManiNav({ toggleSidebar  }) {
                     </div>
                     <div className="w-fit justify-center items-center ml-1 ">
                         {
-                          chechloginState &&  (loginData?.state ?
-                            <ProfileLog loginData={loginData} logOut={(res) => setLoginData(res)} /> :
+                          chechloginState &&  (!loginData?.state ?
                             <div onClick={() => setLoginOpen(true)}
                                 className="flex justify-center items-center h-6 border px-2 text-[15px] rounded-sm cursor-pointer text-center  hover:bg-blue-600   ">
                                 login
-                            </div>)
+                            </div> :
+                            <ProfileLog loginData={loginData} logOut={(res) => setLoginData(res)} />)
+                            
                         }
                         <Login isOpen={isLoginOpen} onClose={() => setLoginOpen(false)} setLoginData={(res) => setLoginData(res)} />
                     </div>

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sanskrit-coders/sanscript": "^1.2.8",
     "framer-motion": "^12.9.4",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.1",
