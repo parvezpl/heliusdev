@@ -62,7 +62,7 @@ export default function Home() {
     console.log('key', process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)
   }
 
-  let timedata = 2000
+  let timedata = 500
   const [suggationword, setSuggationword] = useState([])
   let timeout;
 
@@ -74,7 +74,7 @@ export default function Home() {
 
     timeout = setTimeout(() => {
       fetchData()
-    }, 500);
+    }, timedata);
 
 
     const fetchData = async () => {

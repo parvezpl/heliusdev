@@ -6,12 +6,10 @@ export default async function handler(req, res) {
        
     if (req.method == "GET") {
         const { search } = req.query
-        console.log(search)
         const bnsen = await Bnsen.find()
         bnsen.map((item) => {
-            if (item.chapter == search) {
-                console.log(item.detail)
-                return res.status(200).json({chapter:item.detail})
+            if (item.chapter === search) {
+                return res.status(200).json({chapter:item})
             }
         })
     }
