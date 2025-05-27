@@ -161,12 +161,12 @@ export default function Page() {
         const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
         const data = parts.map((part, i) =>
             part.toLowerCase() === highlight.toLowerCase() ? (
-                <mark key={i} className="bg-yellow-300">{part}</mark>
+                <span key={i} className="bg-yellow-300 ">{part}</span>
             ) : (
-                <pre key={i} className=" font-sans whitespace-break-spaces">{part}</pre>
+                <span key={i} className=" font-sans  ">{part}</span>
             )
         );
-        return data
+        return <div className='whitespace-break-spaces '>{data}</div>
     };
 
     
