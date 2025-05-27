@@ -179,7 +179,9 @@ export default function Page() {
                 <h1 className='text-3xl font-bold text-center my-4 capitalize'>bharatiya nyaya sanhita 2023</h1>
                 <div className='flex flex-row items-center justify-between'>
                     {/* <button></button> */}
-                    <TiThMenu className='text-2xl cursor-pointer' onClick={() => setSidebar(!sidebar)} />
+                    <div className='text-3xl text-blue-900 cursor-pointer' onClick={() => setSidebar(!sidebar)} >
+                        <TiThMenu />
+                    </div>
                     <div className='flex flex-row items-center justify-center gap-2'>
                         <input type="text" placeholder="Search..." className='border border-gray-300 rounded-lg p-2' onChange={searchhandler} />
                         <button className='bg-blue-500 text-white rounded-lg p-2 ml-2'>Search</button>
