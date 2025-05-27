@@ -1,9 +1,11 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
+import { TiThMenu } from "react-icons/ti";
 
 export default function Page() {
     const [bns, setBns] = useState()
+    const [sidebar, setSidebar] = useState(false)
     const [act, setAct] = useState()
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedTerm, setDebouncedTerm] = useState('');
@@ -80,9 +82,6 @@ export default function Page() {
         }
     }
 
-    const rthandler = () => {
-        console.log("right")
-    }
 
     const pagehandler = (e) => {
         console.log(e.target.innerText)
@@ -141,30 +140,37 @@ export default function Page() {
 
     const getHighlightedText = (text, highlight) => {
         // const text=textbreack(texts)
-        console.log(text)
         if (!highlight) return text;
         const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
         const data = parts.map((part, i) =>
             part.toLowerCase() === highlight.toLowerCase() ? (
                 <mark key={i} className="bg-yellow-300">{part}</mark>
             ) : (
-                <pre key={i}>{part}</pre>
+                <pre key={i} className=" font-sans">{part}</pre>
             )
         );
         return data
     };
 
+    const rthandler = () => {
+
+    }
+
     return (
         <div className='  items-center min-h-screen w-screen bg-gray-100 border box-border'>
             <div className='  m-2 p-2 bg-gray-200 rounded-lg shadow-md box-border'>
                 <h1 className='text-3xl font-bold text-center my-4 capitalize'>bharatiya nyaya sanhita 2023</h1>
-                <div className='flex flex-row items-center justify-center gap-2'>
-                    <input type="text" placeholder="Search..." className='border border-gray-300 rounded-lg p-2' onChange={searchhandler} />
-                    <button className='bg-blue-500 text-white rounded-lg p-2 ml-2'>Search</button>
+                <div className='flex flex-row items-center justify-between'>
+                    {/* <button></button> */}
+                    <TiThMenu className='text-2xl cursor-pointer' onClick={() => setSidebar(!sidebar)} />
+                    <div className='flex flex-row items-center justify-center gap-2'>
+                        <input type="text" placeholder="Search..." className='border border-gray-300 rounded-lg p-2' onChange={searchhandler} />
+                        <button className='bg-blue-500 text-white rounded-lg p-2 ml-2'>Search</button>
+                    </div>
                 </div>
             </div>
             <div className='flex relative max-w-full overflow-auto flex-row min-h-full justify-center bg-gray-100'>
-                <div className=' absolute sm:relative left-0 flex-col items-center w-fit min-h-screen  bg-gray-300 rounded-lg shadow-md p-4'>
+                <div className={` absolute sm:relative left-0 flex-col items-center w-fit min-h-screen  bg-gray-300 rounded-lg shadow-md p-4 ${sidebar ? 'visible' : 'hidden sm:visible'}`}>
                     <div className='flex flex-col items-center  justify-center bg-gray-200 rounded-lg shadow-md p-4 overflow-auto'>
                         {
                             chapter.map((item, index) => {
@@ -190,7 +196,7 @@ export default function Page() {
                                             <span>BNS</span> <span className='w-[81px] flex'>ACT :- {getHighlightedText(item.section, searchTerm)}{ }</span>
                                         </div>
                                         <div className='flex flex-col gap-2 grow text-justify'>
-                                            <div className='text-blue-950 font-bold uppercase h-fit '>
+                                            <div className='text-blue-950 font-bold uppercase h-fit w-[50vw]'>
                                                 {getHighlightedText(item.section_title, searchTerm)}
                                             </div>
                                             <div className='text-gray-800 ml-4 h-fit '>
