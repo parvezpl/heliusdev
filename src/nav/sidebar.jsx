@@ -9,6 +9,7 @@ export default function Sidebar({isOpen }) {
     const navitionList = {
         admin: '/adminhome',
         links: '/usefulllinks',
+        translater: '/translater',
         blog: "/blog",
         JavaScript: "/apps",
         Python: "/about",
