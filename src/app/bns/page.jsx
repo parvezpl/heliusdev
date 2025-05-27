@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { TiThMenu } from "react-icons/ti";
 
@@ -9,8 +9,25 @@ export default function Page() {
     const [act, setAct] = useState()
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedTerm, setDebouncedTerm] = useState('');
-    const [chapterdetail, setChapterdetail] = useState()
+    const sidebarRef = useRef(null);
     const numbers = Array.from({ length: 100 }, (_, i) => i + 1);
+
+      useEffect(() => {
+        function handleClickOutside(event) {
+          const isMobile = window.innerWidth <= 768;
+          if (isMobile && sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+            setSidebar(false)
+          }
+        }
+        if (sidebar) {
+          document.addEventListener('mousedown', handleClickOutside)
+        }
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside)
+        }
+      }, [sidebar])
+
+
     const chapter = [
         { id: 1, name: "chapter 1", value: 'CHAPTER I' },
         { id: 2, name: "chapter 2", value: 'CHAPTER II' },
@@ -146,15 +163,13 @@ export default function Page() {
             part.toLowerCase() === highlight.toLowerCase() ? (
                 <mark key={i} className="bg-yellow-300">{part}</mark>
             ) : (
-                <pre key={i} className=" font-sans">{part}</pre>
+                <pre key={i} className=" font-sans whitespace-break-spaces">{part}</pre>
             )
         );
         return data
     };
 
-    const rthandler = () => {
-
-    }
+    
 
     return (
         <div className='  items-center min-h-screen w-screen bg-gray-100 border box-border'>
@@ -170,7 +185,7 @@ export default function Page() {
                 </div>
             </div>
             <div className='flex relative max-w-full overflow-auto flex-row min-h-full justify-center bg-gray-100'>
-                <div className={` absolute sm:relative left-0 flex-col items-center w-fit min-h-screen  bg-gray-300 rounded-lg shadow-md p-4 ${sidebar ? 'visible' : 'hidden sm:visible'}`}>
+                <div ref={sidebarRef} className={` absolute sm:relative left-0 flex-col items-center w-fit min-h-screen  bg-gray-300 rounded-lg shadow-md p-4 ${sidebar ? 'visible' : 'hidden sm:visible'}`}>
                     <div className='flex flex-col items-center  justify-center bg-gray-200 rounded-lg shadow-md p-4 overflow-auto'>
                         {
                             chapter.map((item, index) => {
@@ -186,28 +201,20 @@ export default function Page() {
                     </div>
                 </div>
                 <div className='min-h-[100vh] shrink items-center justify-center bg-gray-300 rounded-lg shadow-md p-4 box-border '>
-                    <div className=' flex flex-col min-h-screen items-center h-screen overflow-y-scroll  bg-gray-200 rounded-lg shadow-md p-4 box-border'>
+                    <div className=' flex flex-col min-h-screen items-center   bg-gray-200 rounded-lg shadow-md p-4 box-border'>
                         {/* <h1 className='text-3xl font-bold text-center'>CHAPTER : {bns?.chapter}</h1> */}
                         {
                             bns && bns.map((item, index) => {
                                 return (
-                                    <div key={index} className='flex flex-row min-h-fit justify-center w-full bg-gray-200 gap-2 px-2 py-4'>
-                                        <div className='flex flex-col text-[16px] text-center text-gray-950 font-bold  px-1'>
-                                            <span>BNS</span> <span className='w-[81px] flex'>ACT :- {getHighlightedText(item.section, searchTerm)}{ }</span>
+                                    <div key={index} className='flex flex-col sm:flex-row min-h-fit justify-center w-full bg-gray-200 gap-2 px-2 py-4'>
+                                        <div className='flex flex-row  sm:flex-col text-[16px]  justify-center sm:justify-start sm:items-start text-gray-950 font-bold  px-1'>
+                                            <span>BNS__  </span> <span className='w-[81px] flex'>ACT :- {getHighlightedText(item.section, searchTerm)}</span>
                                         </div>
                                         <div className='flex flex-col gap-2 grow text-justify'>
-                                            <div className='text-blue-950 font-bold uppercase h-fit w-[50vw]'>
+                                            <pre className='text-blue-950 font-bold h-fit sm:w-[50vw] font-sans whitespace-break-spaces'>
                                                 {getHighlightedText(item.section_title, searchTerm)}
-                                            </div>
-                                            <div className='text-gray-800 ml-4 h-fit '>
-                                                {/* {
-                                                    smartSplit(item.content).map((item1, index) => {
-                                                        return (
-                                                            <li key={index}>{item1.trim()}</li>
-                                                        )
-                                                    })
-                                                } */}
-                                            </div>
+                                            </pre>
+                                            
                                         </div>
                                     </div>
                                 )
@@ -229,7 +236,7 @@ export default function Page() {
                                     )
                                 })}
                         </div>
-                        <AiFillCaretRight onClick={rthandler} className=' cursor-pointer hover:text-blue-700' />
+                        <AiFillCaretRight  className=' cursor-pointer hover:text-blue-700' />
                     </div>
                 </div>
             </div>
