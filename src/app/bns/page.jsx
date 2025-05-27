@@ -43,7 +43,7 @@ export default function Page() {
             setBns(data.bnsen.sections)
         }
         fetchData()
-    },[])
+    }, [])
 
 
     useEffect(() => {
@@ -67,7 +67,7 @@ export default function Page() {
         fetchResults();
     }, [debouncedTerm]);
 
-    const searchhandler =(e)=>{
+    const searchhandler = (e) => {
         setSearchTerm(e.target.value)
     }
 
@@ -134,21 +134,26 @@ export default function Page() {
         return result;
     }
 
+    // const textbreack = (text) => {
+    //     const formatted = text.replace(/(?<!sub-section )(?=\(\d+\))/g, '\n');
+    //     return formatted;
+    // }
 
     const getHighlightedText = (text, highlight) => {
+        // const text=textbreack(texts)
+        console.log(text)
         if (!highlight) return text;
         const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
         const data = parts.map((part, i) =>
             part.toLowerCase() === highlight.toLowerCase() ? (
                 <mark key={i} className="bg-yellow-300">{part}</mark>
             ) : (
-                <span key={i}>{part}</span>
+                <pre key={i}>{part}</pre>
             )
         );
         return data
     };
 
-    console.log("hello")
     return (
         <div className='  items-center min-h-screen w-screen bg-gray-100 border box-border'>
             <div className='  m-2 p-2 bg-gray-200 rounded-lg shadow-md box-border'>
@@ -180,9 +185,11 @@ export default function Page() {
                         {
                             bns && bns.map((item, index) => {
                                 return (
-                                    <div key={index} className='flex flex-row min-h-fit justify-center  bg-gray-200 gap-2 px-2 py-4'>
-                                        <div className='flex flex-col text-[16px] text-center text-gray-950 font-bold  px-1'><span>BNS</span> <span className='w-[81px]'>ACT :- {getHighlightedText(item.section, searchTerm)}{ }</span> </div>
-                                        <div className='flex flex-col gap-2 text-justify'>
+                                    <div key={index} className='flex flex-row min-h-fit justify-center w-full bg-gray-200 gap-2 px-2 py-4'>
+                                        <div className='flex flex-col text-[16px] text-center text-gray-950 font-bold  px-1'>
+                                            <span>BNS</span> <span className='w-[81px] flex'>ACT :- {getHighlightedText(item.section, searchTerm)}{ }</span>
+                                        </div>
+                                        <div className='flex flex-col gap-2 grow text-justify'>
                                             <div className='text-blue-950 font-bold uppercase h-fit '>
                                                 {getHighlightedText(item.section_title, searchTerm)}
                                             </div>
