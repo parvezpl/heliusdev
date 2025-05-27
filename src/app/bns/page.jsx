@@ -96,7 +96,6 @@ export default function Page() {
         const res = await fetch('/api/bns/bnschapter?search=' + value)
         if (res.ok) {
             const data = await res.json()
-            console.log(data.chapter)
             setChapters(data.chapter)
             setBns(data.chapter.sections)
         }
