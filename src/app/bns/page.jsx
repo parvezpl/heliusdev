@@ -9,23 +9,24 @@ export default function Page() {
     const [act, setAct] = useState()
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedTerm, setDebouncedTerm] = useState('');
+    const [chapters, setChapters] = useState({})
     const sidebarRef = useRef(null);
     const numbers = Array.from({ length: 100 }, (_, i) => i + 1);
 
-      useEffect(() => {
+    useEffect(() => {
         function handleClickOutside(event) {
-          const isMobile = window.innerWidth <= 768;
-          if (isMobile && sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-            setSidebar(false)
-          }
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile && sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                setSidebar(false)
+            }
         }
         if (sidebar) {
-          document.addEventListener('mousedown', handleClickOutside)
+            document.addEventListener('mousedown', handleClickOutside)
         }
         return () => {
-          document.removeEventListener('mousedown', handleClickOutside)
+            document.removeEventListener('mousedown', handleClickOutside)
         }
-      }, [sidebar])
+    }, [sidebar])
 
 
     const chapter = [
@@ -95,6 +96,8 @@ export default function Page() {
         const res = await fetch('/api/bns/bnschapter?search=' + value)
         if (res.ok) {
             const data = await res.json()
+            console.log(data.chapter)
+            setChapters(data.chapter)
             setBns(data.chapter.sections)
         }
     }
@@ -169,7 +172,7 @@ export default function Page() {
         return <div className='whitespace-break-spaces '>{data}</div>
     };
 
-    
+
 
     return (
         <div className='  items-center min-h-screen w-screen bg-gray-100 border box-border'>
@@ -202,7 +205,10 @@ export default function Page() {
                 </div>
                 <div className='min-h-[100vh] shrink items-center justify-center bg-gray-300 rounded-lg shadow-md p-4 box-border '>
                     <div className=' flex flex-col min-h-screen items-center   bg-gray-200 rounded-lg shadow-md p-4 box-border'>
-                        {/* <h1 className='text-3xl font-bold text-center'>CHAPTER : {bns?.chapter}</h1> */}
+                        <div className={`flex flex-col items-center w-full mb-4 ${searchTerm.length > 0 ? 'hidden' : 'visible'}`}>
+                            <h1 className=' text-2xl font-bold'>{chapters.chapter}</h1>
+                            <h3 className=' text-xl font-bold text-gray-700'>{chapters.chapter_title}</h3>
+                        </div>
                         {
                             bns && bns.map((item, index) => {
                                 return (
@@ -214,7 +220,7 @@ export default function Page() {
                                             <pre className='text-blue-950 font-bold h-fit sm:w-[50vw] font-sans whitespace-break-spaces'>
                                                 {getHighlightedText(item.section_title, searchTerm)}
                                             </pre>
-                                            
+
                                         </div>
                                     </div>
                                 )
@@ -236,7 +242,7 @@ export default function Page() {
                                     )
                                 })}
                         </div>
-                        <AiFillCaretRight  className=' cursor-pointer hover:text-blue-700' />
+                        <AiFillCaretRight className=' cursor-pointer hover:text-blue-700' />
                     </div>
                 </div>
             </div>
