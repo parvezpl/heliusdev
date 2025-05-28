@@ -10,7 +10,9 @@ export default function Page() {
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedTerm, setDebouncedTerm] = useState('');
     const [chapters, setChapters] = useState({})
+    const [language, setLanguage] = useState('hi')
     const sidebarRef = useRef(null);
+
     const numbers = Array.from({ length: 100 }, (_, i) => i + 1);
 
     useEffect(() => {
@@ -58,12 +60,12 @@ export default function Page() {
     ]
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch('/api/bns/bnsen')
+            const res = language === "en" ? await fetch('/api/bns/bnsen') : await fetch('/api/bns/bnshindi/bnshi')
             const data = await res.json()
-            setBns(data.bnsen.sections)
+            setBns(data.bnshi.sections)
         }
         fetchData()
-    }, [])
+    }, [language])
 
 
     useEffect(() => {
@@ -77,7 +79,7 @@ export default function Page() {
     useEffect(() => {
 
         const fetchResults = async () => {
-            const res = await fetch(`/api/bns/bnssearch?search=${debouncedTerm}`);
+            const res = language === "en" ? await fetch(`/api/bns/bnssearch?search=${debouncedTerm}`) : await fetch(`/api/bns/bnshindi/bnssearch?search=${debouncedTerm}`)
             const datas = res.json();
             datas.then((data) => {
                 setBns(data.bns)
@@ -85,7 +87,7 @@ export default function Page() {
         };
 
         fetchResults();
-    }, [debouncedTerm]);
+    }, [debouncedTerm, language]);
 
     const searchhandler = (e) => {
         setSearchTerm(e.target.value)
@@ -93,7 +95,7 @@ export default function Page() {
 
 
     const chapterhanler = async (value) => {
-        const res = await fetch('/api/bns/bnschapter?search=' + value)
+        const res = language === "en" ? await fetch('/api/bns/bnschapter?search=' + value) : await fetch('/api/bns/bnshindi/bnschapter?search=' + value)
         if (res.ok) {
             const data = await res.json()
             setChapters(data.chapter)
@@ -177,6 +179,12 @@ export default function Page() {
         <div className='  items-center min-h-screen w-screen bg-gray-100 border box-border'>
             <div className='  m-2 p-2 bg-gray-200 rounded-lg shadow-md box-border'>
                 <h1 className='text-3xl font-bold text-center my-4 capitalize'>bharatiya nyaya sanhita 2023</h1>
+                <button
+                    onClick={()=> setLanguage(language === 'en' ? 'hi' : 'en')}
+                    className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                >
+                    Switch to {language === 'en' ? 'English' : 'Hindi'}
+                </button>
                 <div className='flex flex-row items-center justify-between'>
                     {/* <button></button> */}
                     <div className='text-3xl text-blue-900 cursor-pointer' onClick={() => setSidebar(!sidebar)} >

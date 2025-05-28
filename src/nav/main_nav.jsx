@@ -8,19 +8,19 @@ import ProfileLog from "../auth/ProfileLog.jsx";
 import Sidebar from "./sidebar";
 import { MdMenu } from "react-icons/md";
 import { ImCancelCircle } from "react-icons/im";
-export default function ManiNav({ toggleSidebar  }) {
+export default function ManiNav({ toggleSidebar }) {
     const [isLoginOpen, setLoginOpen] = useState(false)
-    const [loginData, setLoginData] = useState({user:{},state:false})
+    const [loginData, setLoginData] = useState({ user: {}, state: false })
     const [islogout, setLogout] = useState(false)
     const [sidebarshow, setServiceShow] = useState(false)
     const [chechloginState, setShechloginState] = useState(false)
 
     useEffect(() => {
         const user = localStorage.getItem('user')
-            if (user) {
-                setLoginData(JSON.parse(user))
-            }
-            setShechloginState(true)
+        if (user) {
+            setLoginData(JSON.parse(user))
+        }
+        setShechloginState(true)
     }, [setLogout])
     // console.log(loginData)
     const menu = [
@@ -40,13 +40,13 @@ export default function ManiNav({ toggleSidebar  }) {
         ">
 
                 {/* onClick={() => setServiceShow(prev => !prev)} */}
-                <div onClick={()=>{
+                <div onClick={() => {
                     toggleSidebar();
                     setServiceShow(prev => !prev)
                 }} className="top-12 max-w-[43vw] sm:min-w-[43vw] ">
                     <span className=" text-2xl py-1 rounded-sm cursor-pointer hover:text-blue-600 rotate-40">
                         {!sidebarshow ?
-                            <MdMenu/>
+                            <MdMenu />
                             :
                             <ImCancelCircle />
                         }
@@ -67,9 +67,9 @@ export default function ManiNav({ toggleSidebar  }) {
                     sm:static sm:flex-row sm:flex sm:gap-2 md:gap-3 `}
                     >
                         {
-                            menu.map((con) => {
+                            menu.map((con, index) => {
                                 return (
-                                    <Link key={con.id}
+                                    <Link key={index}
                                         className=" flex hover:text-blue-500 hover:-translate-1 px-1 text-[2vw] sm:text-[1.5vw] capitalize" href={`${con.url}`}
                                     >
                                         {con.name}
@@ -81,13 +81,13 @@ export default function ManiNav({ toggleSidebar  }) {
                     </div>
                     <div className="w-fit justify-center items-center ml-1 ">
                         {
-                          chechloginState &&  (!loginData?.state ?
-                            <div onClick={() => setLoginOpen(true)}
-                                className="flex justify-center items-center h-6 border px-2 text-[15px] rounded-sm cursor-pointer text-center  hover:bg-blue-600   ">
-                                login
-                            </div> :
-                            <ProfileLog loginData={loginData} logOut={(res) => setLoginData(res)} />)
-                            
+                            chechloginState && (!loginData?.state ?
+                                <div onClick={() => setLoginOpen(true)}
+                                    className="flex justify-center items-center h-6 border px-2 text-[15px] rounded-sm cursor-pointer text-center  hover:bg-blue-600   ">
+                                    login
+                                </div> :
+                                <ProfileLog loginData={loginData} logOut={(res) => setLoginData(res)} />)
+
                         }
                         <Login isOpen={isLoginOpen} onClose={() => setLoginOpen(false)} setLoginData={(res) => setLoginData(res)} />
                     </div>
@@ -98,9 +98,9 @@ export default function ManiNav({ toggleSidebar  }) {
                     sm:static sm:flex-row sm:flex sm:gap-2 md:gap-3 `}
                 >
                     {
-                        menu.map((con) => {
+                        menu.map((con, index) => {
                             return (
-                                <Link key={con.id}
+                                <Link key={index}
                                     className=" flex text-white hover:text-blue-500 hover:-translate-1 px-1 text-[2vw] sm:text-[1.5vw]" href={`${con.url}`}
                                 >
                                     {con.name}
