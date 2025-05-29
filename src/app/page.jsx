@@ -90,6 +90,15 @@ export default function Home() {
       }
     }
   }
+
+  // for how may time visite my site code here 
+  const [count, setCount] = useState(null)
+  useEffect(() => {
+    fetch('/api/visits')
+      .then((res) => res.json())
+      .then((data) => setCount(data.count));
+  }, []);
+
   return (
     <>
       <div ref={navbtnRef}>
@@ -132,7 +141,7 @@ export default function Home() {
                   Subscribe now and take your development journey to the next level!
                 </p>
                 <div className="flex flex-col md:flex-row mt-8 gap-2 justify-center items-center">
-                  <span className=" text-center capitalize">subcribe in only 100 rs.</span>
+                  <span className=" text-center capitalize">subcribe in only 200 rs.</span>
                   <div className="flex flex-col sm:flex-row items-center justify-center ">
                     <div className="text-[14px]">click to get subsciption -</div>
                     <div
@@ -143,6 +152,11 @@ export default function Home() {
 
               </div>
             </div>
+          </div>
+
+          <div className=" absolute right-0  flex flex-col w-fit rounded-md px-2 py-2 justify-center items-center m-4 bg-gray-600 text-blue-200">
+            <p>This site has been visited:</p>
+            <h2>{count !== null ? `${count} times` : 'Loading...'}</h2>
           </div>
         </main>
       </div>
