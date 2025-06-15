@@ -92,12 +92,7 @@ export default function Home() {
   }
 
   // for how may time visite my site code here 
-  const [count, setCount] = useState(null)
-  useEffect(() => {
-    fetch('/api/visits')
-      .then((res) => res.json())
-      .then((data) => setCount(data.count));
-  }, []);
+
 
   return (
     <>
@@ -154,10 +149,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className=" absolute right-0  flex flex-col w-fit rounded-md px-2 py-2 justify-center items-center m-4 bg-gray-600 text-blue-200">
-            <p>This site has been visited:</p>
-            <h2>{count !== null ? `${count} times` : 'Loading...'}</h2>
-          </div>
+
         </main>
       </div>
       <div className="flex min-h-screen pb-4  border-t bg-[#9fcaaa]">

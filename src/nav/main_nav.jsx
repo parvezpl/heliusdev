@@ -25,7 +25,6 @@ export default function ManiNav({ toggleSidebar }) {
     // console.log(loginData)
     const menu = [
         { id: 1, name: "home", url: '/' },
-        { id: 1, name: "bns", url: '/bns' },
         // { id: 2, name: "office", url: '/office' },
         { id: 3, name: "about", url: '/about' },
         { id: 4, name: "community", url: '/community' },
