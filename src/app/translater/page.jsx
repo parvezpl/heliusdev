@@ -16,7 +16,7 @@ export default function Page() {
     const data = await res.json();
     data.translatedText[0]?.map(item=>{
         console.log('data', item[0]);
-        setTranslated(prev => prev + ' ' + item[0]);
+        setTranslated(item[0]);
     })
   };
 
