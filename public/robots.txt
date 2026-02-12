@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://heliusdev.in
+
+# Sitemaps
+Sitemap: https://heliusdev.in/sitemap.xml
