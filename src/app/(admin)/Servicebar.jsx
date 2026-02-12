@@ -39,7 +39,7 @@ export default function Servicebar({ isSidebarOpen }) {
                             type="button"
                         >
                             <span>{value.name}</span>
-                            <span>-></span>
+                            <span>-</span>
                         </button>
                     );
                 })}
