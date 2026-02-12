@@ -1,74 +1,104 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { IoSearchOutline } from "react-icons/io5";
 
 export default function Page() {
     const [paymentdata, setCollection] = React.useState([])
+    const [loading, setLoading] = React.useState(true)
+    const [error, setError] = React.useState("")
+    const searchTimeout = useRef(null)
+
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true)
+                setError("")
                 const response = await fetch('/api/user/payments/payment');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                console.log(data);
                 setCollection(data.payments);
             } catch (error) {
                 console.error('Error fetching data:', error);
+                setError('Failed to load payments')
+            } finally {
+                setLoading(false)
             }
         };
 
         fetchData();
     }, []);
+
     const inpursearchhandler = (e) => {
-        const fetchData = async () => {
+        const term = e.target.value.trim()
+        if (searchTimeout.current) {
+            clearTimeout(searchTimeout.current)
+        }
+        searchTimeout.current = setTimeout(async () => {
             try {
-                const response = await fetch(`/api/user/payments/seachpayment?search=${e.target.value}`);
+                if (term.length === 0) {
+                    setLoading(true)
+                    setError("")
+                    const response = await fetch('/api/user/payments/payment');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    const data = await response.json();
+                    setCollection(data.payments);
+                    setLoading(false)
+                    return
+                }
+                const response = await fetch(`/api/user/payments/seachpayment?search=${term}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                console.log(data);
                 setCollection(data.seardata);
             } catch (error) {
                 console.error('Error fetching data:', error);
+                setError('Search failed')
+            } finally {
+                setLoading(false)
             }
-        };
-        fetchData();
+        }, 250)
     }
-    console.log(paymentdata.length !== 0)
+
     return (
-        <div className='flex flex-col gap-4 p-4 items-center w-full h-screen bg-green-200 text-gray-950'>
-            <h1 className='text-2xl font-bold'>Payments</h1>
-            <div className='flex flex-col gap-4'>
-                <div className='flex justify-between'>
-                    <h2 className='text-xl font-semibold'>Payment History</h2>
-                    <div className='flex flex-col gap-2'>
-                        <div className='flex items-center border border-gray-500 rounded-md p-2'>
-                            <input type="text" placeholder="Search..." className='outline-none' onChange={inpursearchhandler} />
-                            <IoSearchOutline className='text-2xl'/>
-                        </div>
-                        <div className='flex flex-col gap-2 bg-gray-300 text-gray-500 h-fit w-[20vw] p-2 rounded-md'>
-                        //suggasion
-                        </div>
-                    </div>
+        <div className='admin-page'>
+            <div className='panel pad-lg admin-head-row'>
+                <div>
+                    <h1 className='panel-title'>Payments</h1>
+                    <p className='panel-subtitle'>Track recent transactions and payment status.</p>
                 </div>
-                <div className='overflow-auto max-h-[60vh]'>
-                    <table className='min-w-full border-collapse border border-green-400'>
+                <div className='input-shell' style={{ maxWidth: '420px', width: '100%' }}>
+                    <input
+                        type="text"
+                        placeholder="Search payments..."
+                        onChange={inpursearchhandler}
+                    />
+                    <IoSearchOutline />
+                </div>
+            </div>
+            <div className='panel pad-md'>
+                {error && <div className="alert">{error}</div>}
+                <div className='admin-table-wrap'>
+                    <table className='admin-table'>
                         <thead>
                             <tr>
-                                <th className='border border-green-400 px-4 py-2'>Name</th>
-                                <th className='border border-green-400 px-4 py-2'>Date</th>
-                                <th className='border border-green-400 px-4 py-2'>Amount</th>
-                                <th className='border border-green-400 px-4 py-2'>Status</th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {/* Map through payment data here */}
-
-                            {
-                                paymentdata.length !== 0 ? paymentdata.map((value, index) => {
+                            {loading ? (
+                                <tr>
+                                    <td colSpan="4">Loading...</td>
+                                </tr>
+                            ) : paymentdata.length !== 0 ? (
+                                paymentdata.map((value, index) => {
                                     const date = new Date(value.createdAt).toLocaleDateString('en-US', {
                                         year: 'numeric',
                                         month: '2-digit',
@@ -76,20 +106,18 @@ export default function Page() {
                                     });
                                     return (
                                         <tr key={index}>
-                                            <td className='border border-green-300 px-4 py-2'>{value.userId.username}</td>
-                                            <td className='border border-green-300 px-4 py-2'>{date}</td>
-                                            <td className='border border-green-300 px-4 py-2'>{value.amount}</td>
-                                            <td className='border border-green-300 px-4 py-2'>{value.status}</td>
+                                            <td>{value.userId?.username || 'Unknown'}</td>
+                                            <td>{date}</td>
+                                            <td>Rs{value.amount}</td>
+                                            <td><span className="status-ok">{value.status}</span></td>
                                         </tr>
                                     )
                                 })
-                            :
-                            <tr>
-                                <td colSpan="4" className='border border-gray-300 px-4 py-2 text-center'>No Data Found</td>
-                            </tr>
-                            } 
-
-
+                            ) : (
+                                <tr>
+                                    <td colSpan="4">No Data Found</td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>

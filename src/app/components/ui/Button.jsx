@@ -1,16 +1,15 @@
-// components/ui/button.jsx
-export default function Button({ children, onClick, variant = "default", className = "" }) {
-  const base = "px-4 py-2 rounded text-sm font-medium transition";
+export default function Button({ children, onClick, variant = "default", className = "", type = "button" }) {
   const variants = {
-    default: "bg-blue-600 text-white hover:bg-blue-700",
-    destructive: "bg-red-600 text-white hover:bg-red-700",
-    outline: "border border-gray-400 text-gray-800 hover:bg-gray-100",
+    default: "btn btn-ghost",
+    destructive: "btn btn-destructive",
+    outline: "btn btn-ghost",
   };
 
   return (
     <button
+      type={type}
       onClick={onClick}
-      className={`${base} ${variants[variant] || variants.default} ${className}`}
+      className={`${variants[variant] || variants.default} ${className}`.trim()}
     >
       {children}
     </button>

@@ -1,6 +1,8 @@
 
 import "./globals.css";
 import Footer from "../footer/footer";
+import Providers from "./providers";
+import BackButton from "./components/navigation/BackButton";
 
 
 
@@ -13,9 +15,12 @@ export default function RootLayout({ children }) {
         <meta name="description" content="Build smart websites with HeliusDEV." />
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className="">
-        {children}
-        <Footer />
+      <body>
+        <Providers>
+          <BackButton />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

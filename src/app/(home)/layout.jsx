@@ -3,20 +3,20 @@ import Sidebar from '@/nav/sidebar'
 import ManiNav from '../../nav/main_nav'
 import React, { useState } from 'react'
 
-export default function main({ children }) {
+export default function Main({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const toggleSidebar = () => {
-    console.log("sidebar")
     setSidebarOpen(!sidebarOpen);
   };
+
   return (
     <>
       <ManiNav toggleSidebar={toggleSidebar} />
-      <div className='flex '>
-        <div className={`h-screen transition-all duration-300  ${!sidebarOpen ? 'w-0' : 'w-0 sm:w-[20vw]'}`} >
+      <div className='home-row'>
+        <div className={`sidebar-wrap ${!sidebarOpen ? 'closed' : 'open'}`}>
           <Sidebar isOpen={sidebarOpen} />
         </div>
-        {children}
+        <main className="admin-main">{children}</main>
       </div>
     </>
   )

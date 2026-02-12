@@ -5,11 +5,17 @@ import Payments from "../../../../lib/schema/razorpayschema";
 
 
 export default async function handler(req, res) {
-    await connectDB()
-       
-    if (req.method == "GET") {
+    if (req.method !== "GET") {
+        return res.status(405).json({ message: "Method Not Allowed" });
+    }
+
+    try {
+        await connectDB()
         const payments = await Payments.find().populate('userId')
-        return res.status(200).json({ payments});
+        return res.status(200).json({ payments });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 
 }

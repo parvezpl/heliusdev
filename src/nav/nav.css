@@ -1,8 +1,10 @@
 .logo {
-    color: #b50000;
-    font-weight: 800;
-    background-color: #f4f5f5;
-    padding: 1px 14px;
-    border: 1px #09a178 solid;
-    border-radius: 11px;
-  }
+  color: #0f172a;
+  font-weight: 700;
+  background: linear-gradient(120deg, #f8fafc, #e2e8f0);
+  padding: 6px 14px;
+  border: 1px solid rgba(52, 211, 153, 0.5);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
+  letter-spacing: 0.04em;
+}

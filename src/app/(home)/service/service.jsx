@@ -1,18 +1,19 @@
 import React from 'react'
 import DeveloperBadge from './develperbadge'
-import Pythonbadge from './pythonbadge'
 import DatabaseBadge from './tadabasebadge'
 import Expresbadge from './expresbadge'
 
 function Service() {
     return (
-        <div className='flex flex-col w-full justify-center'>
-            <h1 className=' self-center m-4 font-bold text-orange-500 text-2xl text-shadow-black text-shadow-md'>JavaScript Sevice</h1>
-            <div className='flex flex-wrap h-full gap-8'>
+        <div className='service-root'>
+            <div className='service-head'>
+                <span className='pill'>JavaScript Services</span>
+                <h2 className='service-title'>Full-stack delivery, end to end</h2>
+            </div>
+            <div className='service-grid'>
                 <DeveloperBadge />
-                <DatabaseBadge/>
-                <Expresbadge/>
-             
+                <DatabaseBadge />
+                <Expresbadge />
             </div>
         </div>
     )

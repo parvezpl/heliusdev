@@ -1,6 +1,6 @@
 'use client';
 
-import { Code, Database, Server } from 'lucide-react';
+import { Code } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Pythonbadge() {
@@ -9,21 +9,25 @@ export default function Pythonbadge() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="h-[200px] bg-gray-900 text-white p-6 rounded-2xl shadow-lg text-center max-w-xl mx-auto mt-10"
+      className="service-card"
     >
-      <h2 className="text-xl md:text-2xl font-semibold flex flex-wrap items-center justify-center gap-2">
-        <Code className="w-6 h-6 text-indigo-400" />
-        Python
-        <Code className="w-6 h-6 text-indigo-400" />
-      </h2>
-      <div className='mt-4'>
-                <span className=' text-justify '>
-                    <p className='ml-4 text-gray-400'>Proficient in building high-performance APIs with FastAPI, utilizing JavaScript and TypeScript for efficient, scalable backend development.</p>
-                </span>
-                
-            </div>
+      <div className="service-card-header">
+        <div className="service-icon cyan">
+          <Code size={20} />
+        </div>
+        <div>
+          <h3 className="service-card-title">Python APIs</h3>
+          <p className="service-card-meta">FastAPI and Automation</p>
+        </div>
+      </div>
+      <div className='service-card-copy'>
+        <p>High-performance APIs and automation workflows with clean, typed endpoints.</p>
+        <div className="service-tags">
+          <span className="pill muted">FastAPI</span>
+          <span className="pill muted">Background Jobs</span>
+          <span className="pill muted">Data Pipelines</span>
+        </div>
+      </div>
     </motion.div>
   );
 }
-
-
